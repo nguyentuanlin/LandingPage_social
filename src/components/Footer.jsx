@@ -1,0 +1,121 @@
+import React from 'react'
+import { FaFacebook, FaTwitter, FaLinkedin, FaGithub, FaEnvelope, FaPhone, FaMapMarkerAlt } from 'react-icons/fa'
+
+const Footer = () => {
+  const currentYear = new Date().getFullYear()
+
+  const footerLinks = {
+    Product: [
+      { name: 'Features', href: '#features' },
+      { name: 'Pricing', href: '#pricing' },
+      { name: 'Integrations', href: '#omnichannel' },
+      { name: 'API Docs', href: '#' },
+    ],
+    Company: [
+      { name: 'About Us', href: '#' },
+      { name: 'Careers', href: '#' },
+      { name: 'Blog', href: '#' },
+      { name: 'Press Kit', href: '#' },
+    ],
+    Resources: [
+      { name: 'Documentation', href: '#' },
+      { name: 'Help Center', href: '#' },
+      { name: 'Community', href: '#' },
+      { name: 'Contact', href: '#' },
+    ],
+    Legal: [
+      { name: 'Privacy Policy', href: '#' },
+      { name: 'Terms of Service', href: '#' },
+      { name: 'Cookie Policy', href: '#' },
+      { name: 'GDPR', href: '#' },
+    ],
+  }
+
+  const socialLinks = [
+    { icon: <FaFacebook />, href: '#', label: 'Facebook' },
+    { icon: <FaTwitter />, href: '#', label: 'Twitter' },
+    { icon: <FaLinkedin />, href: '#', label: 'LinkedIn' },
+    { icon: <FaGithub />, href: '#', label: 'GitHub' },
+  ]
+
+  return (
+    <footer className="relative pt-20 pb-10 px-4 border-t border-white/10">
+      <div className="container mx-auto max-w-7xl">
+        {/* Main Footer Content */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-6 gap-8 mb-12">
+          {/* Brand Column */}
+          <div className="lg:col-span-2">
+            <h3 className="text-3xl font-black text-gradient mb-4">
+              TLL OMNIAI
+            </h3>
+            <p className="text-white/60 mb-6 leading-relaxed">
+              Intelligent Omnichannel Customer Engagement Platform. 
+              Unify conversations, automate with AI, and delight your customers.
+            </p>
+            
+            {/* Contact Info */}
+            <div className="space-y-2 text-white/60 text-sm">
+              <div className="flex items-center gap-2">
+                <FaEnvelope className="w-4 h-4" />
+                <span>contact@tll-omniai.com</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <FaPhone className="w-4 h-4" />
+                <span>+1 (555) 123-4567</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <FaMapMarkerAlt className="w-4 h-4" />
+                <span>San Francisco, CA</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Links Columns */}
+          {Object.entries(footerLinks).map(([category, links]) => (
+            <div key={category}>
+              <h4 className="text-white font-bold mb-4">{category}</h4>
+              <ul className="space-y-2">
+                {links.map((link) => (
+                  <li key={link.name}>
+                    <a
+                      href={link.href}
+                      className="text-white/60 hover:text-white transition-colors text-sm"
+                    >
+                      {link.name}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+
+        {/* Bottom Bar */}
+        <div className="pt-8 border-t border-white/10">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            {/* Copyright */}
+            <p className="text-white/60 text-sm">
+              © {currentYear} TLL OmniAI. All rights reserved.
+            </p>
+
+            {/* Social Links */}
+            <div className="flex items-center gap-4">
+              {socialLinks.map((social) => (
+                <a
+                  key={social.label}
+                  href={social.href}
+                  aria-label={social.label}
+                  className="w-10 h-10 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center text-white/60 hover:text-white transition-all"
+                >
+                  {social.icon}
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  )
+}
+
+export default Footer
