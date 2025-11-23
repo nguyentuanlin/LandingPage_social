@@ -12,37 +12,37 @@ const OmniChannel = () => {
       name: 'Facebook Messenger',
       icon: <FaFacebook className="w-8 h-8" />,
       color: '#1877F2',
-      features: ['Page Inbox', 'Webhook Events', 'Template Messages']
+      features: ['Hộp thư trang', 'Sự kiện Webhook', 'Tin nhắn mẫu']
     },
     {
       name: 'Telegram',
       icon: <FaTelegram className="w-8 h-8" />,
       color: '#2AABEE',
-      features: ['Bot API', 'File/Voice Support', 'Reply Markup']
+      features: ['Bot API', 'Hỗ trợ File/Voice', 'Nút trả lời']
     },
     {
       name: 'Gmail (Email)',
       icon: <FaEnvelope className="w-8 h-8" />,
       color: '#EA4335',
-      features: ['Inbound/Outbound', 'Threading', 'Attachments']
+      features: ['Đến/Đi', 'Chuỗi tin nhắn', 'Đính kèm']
     },
     {
       name: 'Zalo OA',
       icon: <SiZalo className="w-8 h-8" />,
       color: '#0068FF',
-      features: ['Official Account', 'Webhook', 'Templates']
+      features: ['Tài khoản chính thức', 'Webhook', 'Mẫu tin nhắn']
     },
     {
       name: 'Website Chat',
       icon: <FaGlobe className="w-8 h-8" />,
       color: '#10B981',
-      features: ['Embed Widget', 'Real-time', 'Branding']
+      features: ['Widget nhúng', 'Thời gian thực', 'Thương hiệu']
     },
     {
       name: 'Instagram',
       icon: <FaInstagram className="w-8 h-8" />,
       color: '#E4405F',
-      features: ['Graph API', 'Direct Messages', 'Stories']
+      features: ['Graph API', 'Tin nhắn trực tiếp', 'Stories']
     },
   ]
 
@@ -57,11 +57,11 @@ const OmniChannel = () => {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-black mb-4 text-gradient">
-            Omnichannel Integration
+            Tích hợp đa kênh
           </h2>
           <p className="text-lg md:text-xl text-white/70 max-w-3xl mx-auto">
-            Connect Facebook, Telegram, Gmail, Zalo, and Website Chat into one unified inbox. 
-            Automate responses, route by skills, manage SLAs, and sync knowledge base like OmniAI.
+            Kết nối Facebook, Telegram, Gmail, Zalo và Website Chat vào một hộp thư thống nhất. 
+            Tự động hóa phản hồi, định tuyến theo kỹ năng, quản lý SLA và đồng bộ cơ sở tri thức.
           </p>
         </motion.div>
 
@@ -122,12 +122,12 @@ const OmniChannel = () => {
           className="p-8 rounded-2xl bg-gradient-to-r from-blue-500/10 to-purple-500/10 backdrop-blur-sm border border-dashed border-white/20 text-center"
         >
           <h3 className="text-2xl font-bold text-white mb-2">
-            Unified Inbox + AI Intelligence
+            Hộp thư thống nhất + Trí tuệ nhân tạo
           </h3>
           <p className="text-white/70 max-w-3xl mx-auto">
-            Consolidate all conversations from multiple channels into one unified stream. 
-            Combine multi-source RAG for accurate context-based responses, keyword/after-hours scenarios, 
-            and assign to the right agent.
+            Hợp nhất tất cả cuộc hội thoại từ nhiều kênh vào một luồng thống nhất. 
+            Kết hợp RAG đa nguồn để phản hồi chính xác dựa trên ngữ cảnh, kịch bản từ khóa/ngoài giờ, 
+            và phân công cho nhân viên phù hợp.
           </p>
         </motion.div>
       </div>

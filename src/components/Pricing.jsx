@@ -8,49 +8,49 @@ const Pricing = () => {
 
   const plans = [
     {
-      name: 'Starter',
-      price: '$49',
-      period: '/month',
-      description: 'Perfect for small teams getting started',
+      name: 'Gói khởi đầu',
+      price: '1.200.000₫',
+      period: '/tháng',
+      description: 'Phù hợp cho nhóm nhỏ bắt đầu',
       features: [
-        '3 Channels',
-        '1,000 Messages/month',
-        'Basic AI Auto-Reply',
-        'Email Support',
-        '5 Team Members'
+        '3 Kênh',
+        '1.000 Tin nhắn/tháng',
+        'AI tự động trả lời cơ bản',
+        'Hỗ trợ Email',
+        '5 Thành viên'
       ],
       highlighted: false
     },
     {
-      name: 'Professional',
-      price: '$149',
-      period: '/month',
-      description: 'For growing businesses',
+      name: 'Gói chuyên nghiệp',
+      price: '3.600.000₫',
+      period: '/tháng',
+      description: 'Dành cho doanh nghiệp đang phát triển',
       features: [
-        '6+ Channels',
-        '10,000 Messages/month',
-        'Advanced AI with RAG',
-        'Priority Support',
-        '20 Team Members',
-        'Custom Workflows',
-        'Analytics Dashboard'
+        '6+ Kênh',
+        '10.000 Tin nhắn/tháng',
+        'AI nâng cao với RAG',
+        'Hỗ trợ ưu tiên',
+        '20 Thành viên',
+        'Quy trình tùy chỉnh',
+        'Bảng điều khiển phân tích'
       ],
       highlighted: true
     },
     {
-      name: 'Enterprise',
-      price: 'Custom',
+      name: 'Gói doanh nghiệp',
+      price: 'Tùy chỉnh',
       period: '',
-      description: 'For large organizations',
+      description: 'Dành cho tổ chức lớn',
       features: [
-        'Unlimited Channels',
-        'Unlimited Messages',
-        'Custom AI Training',
-        'Dedicated Support',
-        'Unlimited Team Members',
-        'API Access',
-        'SLA Guarantee',
-        'On-premise Option'
+        'Không giới hạn kênh',
+        'Không giới hạn tin nhắn',
+        'Huấn luyện AI tùy chỉnh',
+        'Hỗ trợ chuyên biệt',
+        'Không giới hạn thành viên',
+        'Truy cập API',
+        'Đảm bảo SLA',
+        'Tùy chọn triển khai nội bộ'
       ],
       highlighted: false
     },
@@ -67,10 +67,10 @@ const Pricing = () => {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-black mb-4 text-gradient">
-            Simple, Transparent Pricing
+            Bảng giá đơn giản, minh bạch
           </h2>
           <p className="text-lg md:text-xl text-white/70 max-w-3xl mx-auto">
-            Choose the perfect plan for your business. All plans include core features.
+            Chọn gói hoàn hảo cho doanh nghiệp của bạn. Tất cả các gói đều bao gồm tính năng cốt lõi.
           </p>
         </motion.div>
 
@@ -90,7 +90,7 @@ const Pricing = () => {
             >
               {plan.highlighted && (
                 <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 text-white text-sm font-bold">
-                  Most Popular
+                  Phổ biến nhất
                 </div>
               )}
 
@@ -130,7 +130,7 @@ const Pricing = () => {
                     : 'bg-white/10 text-white hover:bg-white/20'
                 }`}
               >
-                {plan.name === 'Enterprise' ? 'Contact Sales' : 'Get Started'}
+                {plan.name === 'Gói doanh nghiệp' ? 'Liên hệ bán hàng' : 'Bắt đầu ngay'}
               </button>
             </motion.div>
           ))}
@@ -143,7 +143,7 @@ const Pricing = () => {
           transition={{ duration: 0.6, delay: 0.6 }}
           className="mt-12 text-center text-white/60"
         >
-          <p>All plans include 14-day free trial. No credit card required.</p>
+          <p>Tất cả các gói bao gồm dùng thử miễn phí 14 ngày. Không cần thẻ tín dụng.</p>
         </motion.div>
       </div>
     </section>

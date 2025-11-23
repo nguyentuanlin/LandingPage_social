@@ -9,27 +9,27 @@ const Management = () => {
   const features = [
     {
       icon: <FaUsers className="w-10 h-10" />,
-      title: 'Team Collaboration',
-      description: 'Multi-role permissions, user-channel assignment, and agent routing for efficient teamwork.',
-      items: ['Role-based Access', 'Channel Assignment', 'Agent Performance']
+      title: 'Cộng tác nhóm',
+      description: 'Phân quyền đa vai trò, phân công người dùng-kênh và định tuyến nhân viên hiệu quả.',
+      items: ['Truy cập theo vai trò', 'Phân công kênh', 'Hiệu suất nhân viên']
     },
     {
       icon: <FaChartLine className="w-10 h-10" />,
-      title: 'Analytics & Reports',
-      description: 'Real-time dashboards, conversation metrics, and customer satisfaction tracking.',
-      items: ['CSI Tracking', 'Response Time', 'Conversion Rates']
+      title: 'Phân tích & Báo cáo',
+      description: 'Bảng điều khiển thời gian thực, chỉ số hội thoại và theo dõi sự hài lòng khách hàng.',
+      items: ['Theo dõi CSI', 'Thời gian phản hồi', 'Tỷ lệ chuyển đổi']
     },
     {
       icon: <FaDatabase className="w-10 h-10" />,
-      title: 'Knowledge Base',
-      description: 'Centralized document management with vector search and RAG integration.',
-      items: ['Document Upload', 'Vector Search', 'Access Control']
+      title: 'Cơ sở tri thức',
+      description: 'Quản lý tài liệu tập trung với tìm kiếm vector và tích hợp RAG.',
+      items: ['Tải tài liệu lên', 'Tìm kiếm vector', 'Kiểm soát truy cập']
     },
     {
       icon: <FaShieldAlt className="w-10 h-10" />,
-      title: 'Security & Compliance',
-      description: 'Enterprise-grade security with JWT authentication and access history tracking.',
-      items: ['JWT Auth', 'Audit Logs', 'Data Encryption']
+      title: 'Bảo mật & Tuân thủ',
+      description: 'Bảo mật cấp doanh nghiệp với xác thực JWT và theo dõi lịch sử truy cập.',
+      items: ['Xác thực JWT', 'Nhật ký kiểm toán', 'Mã hóa dữ liệu']
     },
   ]
 
@@ -44,11 +44,11 @@ const Management = () => {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-black mb-4 text-gradient">
-            Centralized Management
+            Quản lý tập trung
           </h2>
           <p className="text-lg md:text-xl text-white/70 max-w-3xl mx-auto">
-            Powerful tools to manage your omnichannel operations, team collaboration, 
-            and customer insights from one intelligent dashboard.
+            Công cụ mạnh mẽ để quản lý hoạt động đa kênh, cộng tác nhóm, 
+            và thông tin khách hàng từ một bảng điều khiển thông minh.
           </p>
         </motion.div>
 
@@ -97,8 +97,8 @@ const Management = () => {
         >
           <div className="inline-block p-6 rounded-2xl bg-gradient-to-r from-blue-500/10 to-purple-500/10 backdrop-blur-sm border border-white/10">
             <p className="text-white/80 text-lg">
-              <span className="font-bold text-white">Enterprise Ready:</span> API & Webhook integration, 
-              Custom workflows, Multi-language support, and 24/7 monitoring
+              <span className="font-bold text-white">Sẵn sàng cho doanh nghiệp:</span> Tích hợp API & Webhook, 
+              Quy trình tùy chỉnh, Hỗ trợ đa ngôn ngữ và Giám sát 24/7
             </p>
           </div>
         </motion.div>

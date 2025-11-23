@@ -4,6 +4,12 @@ export default {
     "./index.html",
     "./src/**/*.{js,jsx}",
   ],
+  safelist: [
+    {
+      // keep dynamic gradient/text/border color utilities used via template strings
+      pattern: /(from|to|via|bg|text|border)-(cyan|blue|purple|emerald|teal|indigo|pink|violet|amber|orange|green|rose|yellow|lime|sky|fuchsia|slate)-\d{1,3}(\/\d{1,3})?/
+    },
+  ],
   theme: {
     extend: {
       colors: {

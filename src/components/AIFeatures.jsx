@@ -9,26 +9,26 @@ const AIFeatures = () => {
   const features = [
     {
       icon: <FaComments className="w-8 h-8" />,
-      title: 'Unified Inbox',
-      description: 'Manage conversations from 6+ channels in one centralized dashboard. Never miss a message.',
+      title: 'Hộp thư thống nhất',
+      description: 'Quản lý hội thoại từ 6+ kênh trong một bảng điều khiển tập trung. Không bỏ lỡ tin nhắn nào.',
       color: '#3b82f6'
     },
     {
       icon: <FaRobot className="w-8 h-8" />,
-      title: 'AI Auto-Reply',
-      description: 'Intelligent responses powered by RAG technology. Context-aware answers from your knowledge base.',
+      title: 'AI tự động trả lời',
+      description: 'Phản hồi thông minh được hỗ trợ bởi công nghệ RAG. Câu trả lời nhận biết ngữ cảnh từ cơ sở tri thức của bạn.',
       color: '#8b5cf6'
     },
     {
       icon: <FaMicrophone className="w-8 h-8" />,
-      title: 'Voice-to-Text',
-      description: 'Automatic transcription of voice messages using Google Cloud Speech-to-Text API.',
+      title: 'Chuyển giọng nói thành văn bản',
+      description: 'Tự động chuyển đổi tin nhắn thoại bằng Google Cloud Speech-to-Text API.',
       color: '#10b981'
     },
     {
       icon: <FaClock className="w-8 h-8" />,
-      title: 'Scheduled Messages',
-      description: 'Schedule broadcasts across multiple channels. Automated messaging with cron jobs.',
+      title: 'Tin nhắn định lịch',
+      description: 'Lên lịch gửi tin trên nhiều kênh. Tin nhắn tự động với cron jobs.',
       color: '#f59e0b'
     },
   ]
@@ -44,11 +44,11 @@ const AIFeatures = () => {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-black mb-4 text-gradient">
-            Smart Conversations with AI
+            Hội thoại thông minh với AI
           </h2>
           <p className="text-lg md:text-xl text-white/70 max-w-3xl mx-auto">
-            Leverage AI technology to automate workflows, optimize customer experience, 
-            and boost omnichannel revenue effectively.
+            Tận dụng công nghệ AI để tự động hóa quy trình, tối ưu trải nghiệm khách hàng, 
+            và tăng doanh thu đa kênh hiệu quả.
           </p>
         </motion.div>
 
@@ -101,32 +101,32 @@ const AIFeatures = () => {
           className="mt-12 p-8 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10"
         >
           <h3 className="text-2xl font-bold text-white mb-4 text-center">
-            More Intelligent Features
+            Thêm nhiều tính năng thông minh
           </h3>
           <div className="grid md:grid-cols-3 gap-4 text-white/70">
             <div className="flex items-center gap-2">
               <span className="text-green-400">✓</span>
-              <span>Customer Satisfaction Index (CSI)</span>
+              <span>Chỉ số hài lòng khách hàng (CSI)</span>
             </div>
             <div className="flex items-center gap-2">
               <span className="text-green-400">✓</span>
-              <span>Quick Message Templates</span>
+              <span>Mẫu tin nhắn nhanh</span>
             </div>
             <div className="flex items-center gap-2">
               <span className="text-green-400">✓</span>
-              <span>Customer Notes & History</span>
+              <span>Ghi chú & Lịch sử khách hàng</span>
             </div>
             <div className="flex items-center gap-2">
               <span className="text-green-400">✓</span>
-              <span>Label & Tag Management</span>
+              <span>Quản lý nhãn & thẻ</span>
             </div>
             <div className="flex items-center gap-2">
               <span className="text-green-400">✓</span>
-              <span>Real-time Polling (3-5s)</span>
+              <span>Cập nhật thời gian thực (3-5s)</span>
             </div>
             <div className="flex items-center gap-2">
               <span className="text-green-400">✓</span>
-              <span>Multi-language Support</span>
+              <span>Hỗ trợ đa ngôn ngữ</span>
             </div>
           </div>
         </motion.div>

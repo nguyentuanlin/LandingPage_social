@@ -5,28 +5,28 @@ const Footer = () => {
   const currentYear = new Date().getFullYear()
 
   const footerLinks = {
-    Product: [
-      { name: 'Features', href: '#features' },
-      { name: 'Pricing', href: '#pricing' },
-      { name: 'Integrations', href: '#omnichannel' },
-      { name: 'API Docs', href: '#' },
+    'Sản phẩm': [
+      { name: 'Tính năng', href: '#features' },
+      { name: 'Bảng giá', href: '#pricing' },
+      { name: 'Tích hợp', href: '#omnichannel' },
+      { name: 'Tài liệu API', href: '#' },
     ],
-    Company: [
-      { name: 'About Us', href: '#' },
-      { name: 'Careers', href: '#' },
+    'Công ty': [
+      { name: 'Về chúng tôi', href: '#' },
+      { name: 'Tuyển dụng', href: '#' },
       { name: 'Blog', href: '#' },
-      { name: 'Press Kit', href: '#' },
+      { name: 'Bộ báo chí', href: '#' },
     ],
-    Resources: [
-      { name: 'Documentation', href: '#' },
-      { name: 'Help Center', href: '#' },
-      { name: 'Community', href: '#' },
-      { name: 'Contact', href: '#' },
+    'Tài nguyên': [
+      { name: 'Tài liệu', href: '#' },
+      { name: 'Trung tâm trợ giúp', href: '#' },
+      { name: 'Cộng đồng', href: '#' },
+      { name: 'Liên hệ', href: '#' },
     ],
-    Legal: [
-      { name: 'Privacy Policy', href: '#' },
-      { name: 'Terms of Service', href: '#' },
-      { name: 'Cookie Policy', href: '#' },
+    'Pháp lý': [
+      { name: 'Chính sách bảo mật', href: '#' },
+      { name: 'Điều khoản dịch vụ', href: '#' },
+      { name: 'Chính sách Cookie', href: '#' },
       { name: 'GDPR', href: '#' },
     ],
   }
@@ -49,8 +49,8 @@ const Footer = () => {
               TLL OMNIAI
             </h3>
             <p className="text-white/60 mb-6 leading-relaxed">
-              Intelligent Omnichannel Customer Engagement Platform. 
-              Unify conversations, automate with AI, and delight your customers.
+              Nền tảng tương tác khách hàng đa kênh thông minh. 
+              Hợp nhất cuộc hội thoại, tự động hóa với AI và làm hài lòng khách hàng của bạn.
             </p>
             
             {/* Contact Info */}
@@ -65,7 +65,7 @@ const Footer = () => {
               </div>
               <div className="flex items-center gap-2">
                 <FaMapMarkerAlt className="w-4 h-4" />
-                <span>San Francisco, CA</span>
+                <span>Hà Nội, Việt Nam</span>
               </div>
             </div>
           </div>
@@ -95,7 +95,7 @@ const Footer = () => {
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             {/* Copyright */}
             <p className="text-white/60 text-sm">
-              © {currentYear} TLL OmniAI. All rights reserved.
+              © {currentYear} TLL OmniAI. Bảo lưu mọi quyền.
             </p>
 
             {/* Social Links */}
