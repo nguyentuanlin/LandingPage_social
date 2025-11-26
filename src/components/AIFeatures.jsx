@@ -34,7 +34,11 @@ const AIFeatures = () => {
   ]
 
   return (
-    <section ref={ref} className="relative py-20 px-4">
+    <section
+      ref={ref}
+      id="features"
+      className="relative py-20 px-4 scroll-mt-24 lg:scroll-mt-32"
+    >
       <div className="container mx-auto max-w-7xl">
         {/* Header */}
         <motion.div

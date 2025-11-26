@@ -1,7 +1,6 @@
 import React, { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
-import { FaFacebook, FaTelegram, FaEnvelope, FaGlobe, FaInstagram } from 'react-icons/fa'
-import { SiZalo } from 'react-icons/si'
+import { FaFacebook, FaTelegram, FaEnvelope, FaWhatsapp, FaInstagram } from 'react-icons/fa'
 
 const OmniChannel = () => {
   const ref = useRef(null)
@@ -28,15 +27,21 @@ const OmniChannel = () => {
     },
     {
       name: 'Zalo OA',
-      icon: <SiZalo className="w-8 h-8" />,
+      icon: (
+        <img
+          src="/img/zalo-logo.png"
+          alt="Zalo OA"
+          className="w-8 h-8 object-contain"
+        />
+      ),
       color: '#0068FF',
       features: ['Tài khoản chính thức', 'Webhook', 'Mẫu tin nhắn']
     },
     {
-      name: 'Website Chat',
-      icon: <FaGlobe className="w-8 h-8" />,
-      color: '#10B981',
-      features: ['Widget nhúng', 'Thời gian thực', 'Thương hiệu']
+      name: 'WhatsApp',
+      icon: <FaWhatsapp className="w-8 h-8" />,
+      color: '#25D366',
+      features: ['Business API', 'Mẫu tin nhắn', 'Chăm sóc sau bán']
     },
     {
       name: 'Instagram',
@@ -47,7 +52,11 @@ const OmniChannel = () => {
   ]
 
   return (
-    <section ref={ref} className="relative py-20 px-4">
+    <section
+      ref={ref}
+      id="omnichannel"
+      className="relative py-20 px-4 scroll-mt-24 lg:scroll-mt-32"
+    >
       <div className="container mx-auto max-w-7xl">
         {/* Header */}
         <motion.div
@@ -60,7 +69,7 @@ const OmniChannel = () => {
             Tích hợp đa kênh
           </h2>
           <p className="text-lg md:text-xl text-white/70 max-w-3xl mx-auto">
-            Kết nối Facebook, Telegram, Gmail, Zalo và Website Chat vào một hộp thư thống nhất. 
+            Kết nối Facebook, Telegram, Gmail, Zalo, Instagram và WhatsApp vào một hộp thư thống nhất. 
             Tự động hóa phản hồi, định tuyến theo kỹ năng, quản lý SLA và đồng bộ cơ sở tri thức.
           </p>
         </motion.div>

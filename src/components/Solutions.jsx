@@ -22,11 +22,10 @@ import {
   FiHeart,
   FiAward,
 } from 'react-icons/fi'
-import 'katex/dist/katex.min.css'
-import { BlockMath } from 'react-katex'
+// Công thức chi tiết CSI được giữ nội bộ, không hiển thị trên landing page
 
 // Floating Icons Background Component
-const FloatingIcons = () => {
+const FloatingIcons = ({ theme = 'dark' }) => {
   const floatingIcons = [
     { icon: FiMessageSquare, x: '8%', y: '12%', delay: 0, color: 'cyan', size: 'lg' },
     { icon: FiCpu, x: '88%', y: '18%', delay: 1, color: 'purple', size: 'md' },
@@ -47,6 +46,10 @@ const FloatingIcons = () => {
     { icon: FiHeart, x: '13%', y: '78%', delay: 16, color: 'fuchsia', size: 'md' },
     { icon: FiAward, x: '62%', y: '12%', delay: 17, color: 'slate', size: 'sm' },
   ]
+
+  if (theme === 'light') {
+    return null
+  }
 
   const getSizeClasses = (size) => {
     switch (size) {
@@ -126,109 +129,83 @@ const FloatingIcons = () => {
   )
 }
 
-const Solutions = () => {
+const Solutions = ({ theme = 'dark' }) => {
   const sections = useMemo(() => ([
     { 
       id: 'intro', 
       label: 'Giới thiệu', 
       icon: FiMessageSquare,
-      highlights: ['Điểm nổi bật', 'Chỉ số chính', 'Tích hợp']
+      highlights: ['Omnichannel Inbox', 'AI + CRM', '3 backend chuyên biệt']
     },
     { 
       id: 'intelligence', 
       label: 'TLL Intelligence', 
       icon: FiCpu,
-      highlights: ['RAG trả lời ngữ cảnh', 'STT cho voice messages', 'Gửi tin nhắn định lịch']
+      highlights: ['RAG theo tri thức doanh nghiệp', 'Speech-to-Text cho voice Telegram', 'Phân tích, tóm tắt hội thoại']
     },
     { 
       id: 'omni-experience', 
-      label: 'Trải nghiệm mua hàng đa kênh', 
+      label: 'Trải nghiệm đa kênh', 
       icon: FiShoppingCart,
-      highlights: ['Kết nối đa kênh', 'Đồng bộ hội thoại', 'Phân công & SLA']
+      highlights: ['Facebook, Instagram, Telegram, Gmail, Outlook', 'Hợp nhất hội thoại đa kênh', 'Email hiển thị ngay trong chat']
     },
     { 
       id: 'centralized-management', 
-      label: 'Quản lý đa kênh tập trung', 
+      label: 'Quản lý hội thoại & khách hàng', 
       icon: FiGrid,
-      highlights: ['Nhật ký khách hàng', 'Mẫu tin nhắn nhanh', 'Báo cáo theo kênh']
+      highlights: ['Nhật ký khách hàng & hồ sơ social', 'Gắn nhãn tin nhắn, quản lý Labels', 'Phân công kênh cho từng nhân viên']
     },
     { 
-      id: 'product', 
-      label: 'Quản lý sản phẩm', 
-      icon: FiBox,
-      highlights: ['SKU & biến thể', 'Đồng bộ tồn kho', 'Theo dõi kênh']
-    },
-    { 
-      id: 'inventory', 
-      label: 'Quản lý kho', 
-      icon: FiPackage,
-      highlights: ['Nhập/xuất/chuyển', 'Cảnh báo tồn', 'Định mức']
-    },
-    { 
-      id: 'orders', 
-      label: 'Quản lý đơn hàng', 
-      icon: FiFileText,
-      highlights: ['Tạo/đồng bộ đơn', 'Trạng thái', 'Đổi trả']
-    },
-    { 
-      id: 'shipping', 
-      label: 'Vận chuyển, thanh toán', 
-      icon: FiTruck,
-      highlights: ['Kết nối vận chuyển', 'COD/Online', 'Đối soát phí']
-    },
-    { 
-      id: 'promotions', 
-      label: 'Quản lý khuyến mãi', 
-      icon: FiPercent,
-      highlights: ['Mã giảm giá', 'Combo & Flash sale', 'Upsell']
-    },
-    { 
-      id: 'finance', 
-      label: 'Sổ quỹ, thu chi', 
-      icon: FiDollarSign,
-      highlights: ['Dòng tiền', 'Theo kênh/chiến dịch', 'Báo cáo lợi nhuận']
+      id: 'tools-automation', 
+      label: 'Công cụ & Tự động hoá', 
+      icon: FiZap,
+      highlights: ['Mẫu email & template gửi nhanh', 'Đồng bộ Gmail/Outlook linh hoạt', 'Cấu hình Social Networks tập trung']
     },
     { 
       id: 'csi', 
       label: 'CSI (Đo hài lòng)', 
       icon: FiStar,
-      highlights: ['Độ hài lòng', 'Tỷ lệ giải quyết', 'Tốc độ phản hồi']
-    },
-    { 
-      id: 'kpi', 
-      label: 'Công thức & KPI', 
-      icon: FiBookOpen,
-      highlights: ['CSAT & NPS', 'Chỉ số giải quyết', 'KPI kinh doanh']
+      highlights: ['CSI theo cảm xúc & thời gian', 'Biểu đồ CSI theo kênh/nhân viên', 'Theo dõi trải nghiệm khách hàng']
     },
   ]), [])
 
+  const SCROLL_OFFSET = 160
+
   const [active, setActive] = useState('intro')
-  const [expandedId, setExpandedId] = useState(null)
+  const [expandedId, setExpandedId] = useState('intro')
   const containerRef = useRef(null)
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((e) => e.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0]
-        if (visible?.target?.id) setActive(visible.target.id)
-      },
-      { root: null, rootMargin: '-160px 0px -40% 0px', threshold: [0.2, 0.4, 0.6, 0.8] }
-    )
+    const handleScroll = () => {
+      const anchor = SCROLL_OFFSET
+      let currentId = sections[0]?.id
+      let minDistance = Infinity
 
-    sections.forEach((s) => {
-      const el = document.getElementById(s.id)
-      if (el) observer.observe(el)
-    })
+      sections.forEach((s) => {
+        const el = document.getElementById(s.id)
+        if (!el) return
+        const rect = el.getBoundingClientRect()
+        const distance = Math.abs(rect.top - anchor)
+        if (distance < minDistance) {
+          minDistance = distance
+          currentId = s.id
+        }
+      })
 
-    return () => observer.disconnect()
+      if (currentId) {
+        setActive(currentId)
+      }
+    }
+
+    handleScroll()
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
   }, [sections])
 
   const handleNavClick = (id) => {
     const el = document.getElementById(id)
     if (!el) return
-    const y = el.getBoundingClientRect().top + window.scrollY - 96
+    const y = el.getBoundingClientRect().top + window.scrollY - SCROLL_OFFSET
     window.scrollTo({ top: y, behavior: 'smooth' })
   }
 
@@ -243,37 +220,17 @@ const Solutions = () => {
   }, [csat, resolution, speed])
 
   // Interactive CSI (emotion/time) calculator
-  const [reiText, setReiText] = useState('-0.2, 0.6, 0.3, -0.1')
-  const [dtText, setDtText] = useState('3600, 7200, 86400, 172800')
-  const [nmsgInput, setNmsgInput] = useState(120)
-  const [ngapInput, setNgapInput] = useState(2)
-  const [lambdaVal, setLambdaVal] = useState(0.3)
-  const [alphaVal, setAlphaVal] = useState(0.5)
-  const [betaVal, setBetaVal] = useState(1e-6)
-
-  const parseNumbers = (s) => (s || '').split(/[\s,]+/).map((v) => parseFloat(v)).filter((n) => !Number.isNaN(n))
-  const reiArr = useMemo(() => parseNumbers(reiText), [reiText])
-  const dtArr = useMemo(() => parseNumbers(dtText), [dtText])
-  const neCalc = Math.min(reiArr.length, dtArr.length)
-  const wArr = useMemo(() => dtArr.slice(0, neCalc).map((d) => Math.exp(-betaVal * d)), [dtArr, neCalc, betaVal])
-  const numerator = useMemo(() => reiArr.slice(0, neCalc).reduce((acc, r, i) => acc + r * wArr[i], 0), [reiArr, neCalc, wArr])
-  const nbar = Math.max(0, nmsgInput - neCalc)
-  const denom = useMemo(() => wArr.reduce((a, b) => a + b, 0) + lambdaVal * (nbar + alphaVal * ngapInput), [wArr, lambdaVal, nbar, alphaVal, ngapInput])
-  const csiEmoRaw = denom > 0 ? numerator / denom : 0
-  const csiEmo = Math.max(-1, Math.min(1, csiEmoRaw))
-  const interp = (x) => {
-    if (x >= 0.7) return 'Rất hài lòng'
-    if (x >= 0.3) return 'Hài lòng'
-    if (x >= -0.3) return 'Trung lập'
-    if (x >= -0.7) return 'Không hài lòng'
-    return 'Rất không hài lòng'
-  }
-  const [showAdvanced, setShowAdvanced] = useState(false)
+  // Các tham số và công thức chi tiết CSI được giữ trong nội bộ sản phẩm,
+  // landing page chỉ hiển thị khái niệm trực quan (slider + gauge + KPI).
 
   return (
-    <section ref={containerRef} className="relative py-24 px-4 lg:py-32 overflow-hidden" id="solutions">
+    <section
+      ref={containerRef}
+      id="solutions"
+      className="relative py-24 px-4 lg:py-32 overflow-x-hidden scroll-mt-24 lg:scroll-mt-32"
+    >
       {/* Floating Icons Background */}
-      <FloatingIcons />
+      <FloatingIcons theme={theme} />
       
       {/* Section Header */}
       <div className="container mx-auto max-w-7xl mb-16 lg:mb-20 relative z-10">
@@ -293,15 +250,15 @@ const Solutions = () => {
         </motion.div>
       </div>
 
-      <div className="container mx-auto max-w-7xl grid grid-cols-1 lg:grid-cols-[300px_minmax(0,1fr)] gap-8 lg:gap-12 relative z-10">
+      <div className="container mx-auto max-w-7xl grid grid-cols-1 lg:grid-cols-[360px_minmax(0,1fr)] gap-8 lg:gap-12 relative z-10">
         {/* Sidebar Navigation */}
-        <div className="lg:sticky lg:top-24 h-max mb-8 lg:mb-0">
+        <div className="h-max mb-8 lg:mb-0 lg:sticky lg:top-32">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="rounded-2xl bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl border border-white/20 p-4 shadow-2xl"
+            className="rounded-3xl bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl border border-white/20 p-5 shadow-2xl"
           >
             <div className="space-y-2">
               {sections.map((s, idx) => {
@@ -317,7 +274,8 @@ const Solutions = () => {
                   >
                     <button
                       onClick={() => {
-                        setExpandedId(isExpanded ? null : s.id)
+                        setExpandedId(s.id)
+                        setActive(s.id)
                         handleNavClick(s.id)
                       }}
                       className={`w-full group relative overflow-hidden rounded-xl transition-all duration-300 ${
@@ -335,15 +293,15 @@ const Solutions = () => {
                         />
                       )}
                       
-                      <div className="flex items-center gap-3 px-4 py-4">
-                        <div className={`p-2 rounded-lg transition-all duration-300 ${
+                      <div className="flex items-center gap-3 px-5 py-4">
+                        <div className={`solutions-nav-icon p-2 rounded-lg transition-all duration-300 ${
                           isActive 
                             ? 'bg-gradient-to-br from-cyan-400/20 to-blue-500/20 text-cyan-400' 
                             : 'bg-white/5 text-white/70 group-hover:bg-white/10 group-hover:text-white'
                         }`}>
                           <Icon className="w-4 h-4" />
                         </div>
-                        <span className={`flex-1 text-left text-sm font-medium transition-colors ${
+                        <span className={`flex-1 text-left text-base font-medium transition-colors ${
                           isActive ? 'text-white' : 'text-white/80 group-hover:text-white'
                         }`}>
                           {s.label}
@@ -396,13 +354,22 @@ const Solutions = () => {
             <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-cyan-500/10 to-blue-500/10 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             <div className="relative">
               <div className="flex items-center gap-4 mb-6">
-                <div className="p-3 rounded-xl bg-gradient-to-br from-cyan-400/20 to-blue-500/20 border border-cyan-400/30">
+                <div className="solutions-section-icon p-3 rounded-xl bg-gradient-to-br from-cyan-400/20 to-blue-500/20 border border-cyan-400/30">
                   <FiMessageSquare className="w-6 h-6 text-cyan-400" />
                 </div>
                 <h3 className="text-3xl font-bold text-white">Giới thiệu</h3>
               </div>
               <p className="text-white/80 text-lg leading-relaxed">
-                TLL Omnichannel giúp hợp nhất các kênh <span className="text-cyan-400 font-semibold">(Facebook, Telegram, Gmail, Zalo, Website chat)</span> vào một inbox, tích hợp AI để tự động phản hồi và tối ưu vận hành.
+                TLL Omnichannel là nền tảng <span className="text-cyan-400 font-semibold">AI CRM đa kênh</span>{' '}
+                giúp hợp nhất các kênh social & email
+                <span className="text-cyan-400 font-semibold"> (ví dụ: Facebook, Instagram, Telegram, Gmail, Outlook)</span>{' '}
+                vào một inbox duy nhất, được thiết kế riêng cho đội chăm sóc khách hàng hiện đại.
+                <span className="block mt-3">
+                  Thay vì nhân viên phải mở nhiều tab, ghi chú rời rạc và khó theo dõi lịch sử khách hàng, mọi cuộc hội thoại,
+                  hồ sơ social và các chỉ số chất lượng dịch vụ như CSI, SLA, hiệu suất agent đều được tập trung về một nơi.
+                  Từ đó AI có thể phân tích, tóm tắt bối cảnh và gợi ý phản hồi thông minh, giúp doanh nghiệp mở rộng quy mô
+                  chăm sóc khách hàng mà vẫn giữ trải nghiệm cá nhân hóa.
+                </span>
               </p>
             </div>
           </motion.div>
@@ -414,27 +381,56 @@ const Solutions = () => {
             whileInView={{ opacity: 1, y: 0 }} 
             viewport={{ once: true }} 
             transition={{ duration: 0.5 }}
-            className="group relative rounded-3xl bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl border border-white/20 p-8 lg:p-10 hover:border-purple-400/50 transition-all duration-300 overflow-hidden"
+            className="group relative rounded-3xl bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl border border-white/20 p-8 lg:p-10 hover:border-purple-400/50 transition-all duration-300 overflow-hidden scroll-mt-28 lg:scroll-mt-36"
           >
             <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-purple-500/10 to-pink-500/10 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             <div className="relative">
-              <div className="flex items-center gap-4 mb-8">
-                <div className="p-3 rounded-xl bg-gradient-to-br from-purple-400/20 to-pink-500/20 border border-purple-400/30">
+              <div className="flex items-center gap-4 mb-4">
+                <div className="solutions-section-icon p-3 rounded-xl bg-gradient-to-br from-purple-400/20 to-pink-500/20 border border-purple-400/30">
                   <FiCpu className="w-6 h-6 text-purple-400" />
                 </div>
-                <h3 className="text-3xl font-bold text-white">TLL Intelligence</h3>
+                <div>
+                  <h3 className="text-3xl font-bold text-white">TLL Intelligence</h3>
+                  <p className="text-white/70 text-sm mt-1 max-w-2xl">
+                    “Bộ não AI” của hệ thống, hiểu ngữ cảnh và tri thức riêng của doanh nghiệp thay vì trả lời chung chung như chatbot phổ thông.
+                  </p>
+                </div>
               </div>
               <div className="space-y-5">
                 {[
-                  { title: 'RAG trả lời ngữ cảnh', desc: 'theo tri thức doanh nghiệp' },
-                  { title: 'STT cho voice messages', desc: '(Google Speech-to-Text)' },
-                  { title: 'Gửi tin nhắn định lịch', desc: 'theo chiến dịch' }
+                  { 
+                    title: 'RAG theo tri thức doanh nghiệp', 
+                    badge: 'AI không bịa',
+                    desc: 'Kết nối trực tiếp với kho tài liệu nội bộ, chính sách và quy trình để trả lời chuẩn giọng thương hiệu.' 
+                  },
+                  { 
+                    title: 'Speech‑to‑Text cho voice Telegram', 
+                    badge: 'Hiểu khách hàng theo thời gian thực',
+                    desc: 'Tự động chuyển voice thành văn bản, lưu toàn bộ vào lịch sử hội thoại để AI phân tích & tóm tắt.' 
+                  },
+                  { 
+                    title: 'Phân tích & tóm tắt hội thoại', 
+                    badge: 'Insight tức thì',
+                    desc: 'Rút gọn hàng trăm tin nhắn thành vài dòng, highlight ý định mua hàng, khiếu nại và next‑action cho agent.' 
+                  }
                 ].map((item, i) => (
-                  <div key={i} className="flex items-start gap-4 p-5 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all">
-                    <FiCheckCircle className="w-5 h-5 text-purple-400 flex-shrink-0 mt-0.5" />
-                    <div>
-                      <div className="text-white font-semibold">{item.title}</div>
-                      <div className="text-white/60 text-sm">{item.desc}</div>
+                  <div
+                    key={i}
+                    className="flex items-start gap-4 p-5 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-purple-400/40 transition-all"
+                  >
+                    <div className="solutions-sub-icon mt-1 p-2 rounded-lg bg-gradient-to-br from-purple-500/20 to-pink-500/20 border border-purple-400/40">
+                      <FiCheckCircle className="w-4 h-4 text-purple-200" />
+                    </div>
+                    <div className="flex-1">
+                      <div className="flex items-center justify-between gap-3">
+                        <div className="text-white font-semibold">{item.title}</div>
+                        {item.badge && (
+                          <span className="solutions-badge px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-purple-500/20 text-purple-200 border border-purple-300/30 whitespace-nowrap">
+                            {item.badge}
+                          </span>
+                        )}
+                      </div>
+                      <div className="text-white/60 text-sm mt-1">{item.desc}</div>
                     </div>
                   </div>
                 ))}
@@ -442,32 +438,54 @@ const Solutions = () => {
             </div>
           </motion.div>
 
-          {/* Trải nghiệm mua hàng đa kênh */}
+          {/* Trải nghiệm chăm sóc khách hàng đa kênh */}
           <motion.div 
             id="omni-experience" 
             initial={{ opacity: 0, y: 24 }} 
             whileInView={{ opacity: 1, y: 0 }} 
             viewport={{ once: true }} 
             transition={{ duration: 0.5 }}
-            className="group relative rounded-3xl bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl border border-white/20 p-8 lg:p-10 hover:border-emerald-400/50 transition-all duration-300 overflow-hidden"
+            className="group relative rounded-3xl bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl border border-white/20 p-8 lg:p-10 hover:border-emerald-400/50 transition-all duration-300 overflow-hidden scroll-mt-28 lg:scroll-mt-36"
           >
             <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-emerald-500/10 to-teal-500/10 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             <div className="relative">
-              <div className="flex items-center gap-4 mb-8">
-                <div className="p-3 rounded-xl bg-gradient-to-br from-emerald-400/20 to-teal-500/20 border border-emerald-400/30">
+              <div className="flex items-center gap-4 mb-4">
+                <div className="solutions-section-icon p-3 rounded-xl bg-gradient-to-br from-emerald-400/20 to-teal-500/20 border border-emerald-400/30">
                   <FiShoppingCart className="w-6 h-6 text-emerald-400" />
                 </div>
-                <h3 className="text-3xl font-bold text-white">Trải nghiệm mua hàng đa kênh</h3>
+                <div>
+                  <h3 className="text-3xl font-bold text-white">Trải nghiệm khách hàng đa kênh liền mạch</h3>
+                  <p className="text-white/70 text-sm mt-1 max-w-2xl">
+                    Khách nhắn ở đâu cũng được nhận diện ngay ở đó; hành trình không bị đứt đoạn giữa Facebook, Instagram, Telegram, Gmail, Outlook.
+                  </p>
+                </div>
               </div>
               <div className="space-y-5">
                 {[
-                  'Kết nối Facebook, Telegram, Gmail, Zalo, Web chat',
-                  'Đồng bộ hội thoại về một luồng thống nhất',
-                  'Phân công, SLA, gợi ý trả lời thông minh'
+                  {
+                    title: 'Một hộp thư hợp nhất cho mọi kênh',
+                    desc: 'Gom Facebook, Instagram, Telegram, Gmail, Outlook vào một màn hình – agent xử lý nhanh hơn, không còn cảnh nhảy tab và bỏ sót tin.' 
+                  },
+                  {
+                    title: 'Không bao giờ hỏi lại “Anh/chị là ai ạ?”',
+                    desc: 'Hệ thống tự ghép lịch sử hội thoại đa kênh, agent luôn thấy trọn bối cảnh mỗi khi khách quay lại ở bất kỳ kênh nào.' 
+                  },
+                  {
+                    title: 'Trải nghiệm nhất quán & đo lường được',
+                    desc: 'Chuẩn hoá kịch bản trả lời trên tất cả kênh, đồng thời theo dõi SLA, CSI và tốc độ phản hồi để tối ưu từng kênh và chiến dịch.' 
+                  }
                 ].map((item, i) => (
-                  <div key={i} className="flex items-start gap-4 p-5 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all">
-                    <FiCheckCircle className="w-5 h-5 text-emerald-400 flex-shrink-0 mt-0.5" />
-                    <span className="text-white/80">{item}</span>
+                  <div
+                    key={i}
+                    className="flex items-start gap-4 p-5 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-emerald-400/40 transition-all"
+                  >
+                    <div className="solutions-sub-icon mt-1 p-2 rounded-lg bg-gradient-to-br from-emerald-400/20 to-teal-500/20 border border-emerald-300/40">
+                      <FiCheckCircle className="w-4 h-4 text-emerald-100" />
+                    </div>
+                    <div>
+                      <div className="text-white font-semibold">{item.title}</div>
+                      <div className="text-white/70 text-sm mt-1">{item.desc}</div>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -481,66 +499,105 @@ const Solutions = () => {
             whileInView={{ opacity: 1, y: 0 }} 
             viewport={{ once: true }} 
             transition={{ duration: 0.5 }}
-            className="group relative rounded-3xl bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl border border-white/20 p-8 lg:p-10 hover:border-blue-400/50 transition-all duration-300 overflow-hidden"
+            className="group relative rounded-3xl bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl border border-white/20 p-8 lg:p-10 hover:border-blue-400/50 transition-all duration-300 overflow-hidden scroll-mt-28 lg:scroll-mt-36"
           >
             <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-blue-500/10 to-indigo-500/10 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             <div className="relative">
-              <div className="flex items-center gap-4 mb-8">
-                <div className="p-3 rounded-xl bg-gradient-to-br from-blue-400/20 to-indigo-500/20 border border-blue-400/30">
+              <div className="flex items-center gap-4 mb-4">
+                <div className="solutions-section-icon p-3 rounded-xl bg-gradient-to-br from-blue-400/20 to-indigo-500/20 border border-blue-400/30">
                   <FiGrid className="w-6 h-6 text-blue-400" />
                 </div>
-                <h3 className="text-3xl font-bold text-white">Quản lý đa kênh tập trung</h3>
+                <div>
+                  <h3 className="text-3xl font-bold text-white">Quản lý đa kênh tập trung</h3>
+                  <p className="text-white/70 text-sm mt-1 max-w-2xl">
+                    Một nơi duy nhất để nắm toàn bộ khách hàng, hội thoại và hiệu suất đội ngũ – không còn dữ liệu bị chia cắt.
+                  </p>
+                </div>
               </div>
               <div className="space-y-5">
                 {[
-                  'Nhật ký khách hàng, nhãn/nhóm, ghi chú',
-                  'Mẫu tin nhắn nhanh, kịch bản bot theo giờ',
-                  'Báo cáo theo kênh/nhân viên'
+                  {
+                    title: 'Hồ sơ khách hàng 360°',
+                    desc: 'Nhật ký hội thoại, social profile, email, ghi chú và metadata đa nền tảng được gom vào một timeline duy nhất.' 
+                  },
+                  {
+                    title: 'Nhãn & phân loại thông minh',
+                    desc: 'Gắn nhãn trực tiếp trên từng tin nhắn để lọc nhanh, tạo báo cáo và kích hoạt kịch bản tự động hoá.' 
+                  },
+                  {
+                    title: 'Dashboard theo kênh & agent',
+                    desc: 'Nhìn rõ hiệu suất từng kênh và từng nhân viên để phân bổ nguồn lực, thưởng – phạt minh bạch.' 
+                  }
                 ].map((item, i) => (
-                  <div key={i} className="flex items-start gap-4 p-5 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all">
-                    <FiCheckCircle className="w-5 h-5 text-blue-400 flex-shrink-0 mt-0.5" />
-                    <span className="text-white/80">{item}</span>
+                  <div
+                    key={i}
+                    className="flex items-start gap-4 p-5 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-blue-400/40 transition-all"
+                  >
+                    <div className="solutions-sub-icon mt-1 p-2 rounded-lg bg-gradient-to-br from-blue-400/20 to-indigo-500/20 border border-blue-300/40">
+                      <FiCheckCircle className="w-4 h-4 text-blue-100" />
+                    </div>
+                    <div>
+                      <div className="text-white font-semibold">{item.title}</div>
+                      <div className="text-white/70 text-sm mt-1">{item.desc}</div>
+                    </div>
                   </div>
                 ))}
               </div>
             </div>
           </motion.div>
 
-          {/* Compact Cards Grid */}
-          <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
-            {[
-              { id: 'product', icon: FiBox, title: 'Quản lý sản phẩm', desc: 'SKU, thuộc tính, biến thể; đồng bộ tồn kho theo kênh.', color: 'amber' },
-              { id: 'inventory', icon: FiPackage, title: 'Quản lý kho', desc: 'Nhập/xuất/chuyển kho, cảnh báo tồn, định mức.', color: 'orange' },
-              { id: 'orders', icon: FiFileText, title: 'Quản lý đơn hàng', desc: 'Tạo/đồng bộ đơn, trạng thái, đổi trả, ghi chú nội bộ.', color: 'rose' },
-              { id: 'shipping', icon: FiTruck, title: 'Vận chuyển, thanh toán', desc: 'Kết nối hãng vận chuyển, COD/online, đối soát phí.', color: 'violet' },
-              { id: 'promotions', icon: FiPercent, title: 'Quản lý khuyến mãi', desc: 'Mã giảm, combo, flash sale; phân khúc & gợi ý upsell.', color: 'pink' },
-              { id: 'finance', icon: FiDollarSign, title: 'Sổ quỹ, thu chi', desc: 'Dòng tiền theo kênh/chiến dịch; báo cáo lợi nhuận gộp.', color: 'green' }
-            ].map((card, idx) => {
-              const Icon = card.icon
-              return (
-                <motion.div
-                  key={card.id}
-                  id={card.id}
-                  initial={{ opacity: 0, y: 24 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: idx * 0.1 }}
-                  className="group relative rounded-2xl bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl border border-white/20 p-6 lg:p-8 hover:border-white/40 transition-all duration-300 overflow-hidden"
-                >
-                  <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-${card.color}-500/10 to-${card.color}-600/10 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
-                  <div className="relative">
-                    <div className="flex items-start gap-4 mb-4">
-                      <div className={`p-2.5 rounded-lg bg-gradient-to-br from-${card.color}-400/20 to-${card.color}-500/20 border border-${card.color}-400/30`}>
-                        <Icon className={`w-5 h-5 text-${card.color}-400`} />
+          {/* Tools & Automation Cards */}
+          <motion.div 
+            id="tools-automation"
+            initial={{ opacity: 0, y: 24 }} 
+            whileInView={{ opacity: 1, y: 0 }} 
+            viewport={{ once: true }} 
+            transition={{ duration: 0.5 }}
+            className="group relative rounded-3xl bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl border border-white/20 p-8 lg:p-10 overflow-hidden scroll-mt-28 lg:scroll-mt-36"
+          >
+            <div className="absolute top-0 right-0 w-80 h-80 bg-gradient-to-br from-cyan-500/10 to-blue-500/10 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <div className="relative">
+              <div className="flex items-center gap-4 mb-8">
+                <div className="solutions-section-icon p-3 rounded-xl bg-gradient-to-br from-cyan-400/20 to-blue-500/20 border border-cyan-400/30">
+                  <FiZap className="w-6 h-6 text-cyan-400" />
+                </div>
+                <h3 className="text-3xl font-bold text-white">Công cụ & Tự động hoá</h3>
+              </div>
+              <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
+                {[
+                  { id: 'tools-email', icon: FiFileText, title: 'Email & Gmail/Outlook', desc: 'Đồng bộ email từ Gmail, hiển thị dạng thẻ trong cửa sổ chat; badge số thư chưa đọc thực tế từ Outlook.', color: 'cyan' },
+                  { id: 'tools-voice', icon: FiBox, title: 'Voice & Speech-to-Text', desc: 'Nhận voice từ Telegram, tự động chuyển sang văn bản bằng OpenAI Whisper và lưu kèm metadata.', color: 'purple' },
+                  { id: 'tools-labels', icon: FiPackage, title: 'Quản lý nhãn & phân loại', desc: 'Trang quản lý Labels chuyên biệt, gán/bỏ nhãn ngay trên từng tin nhắn để phân loại và tự động hoá.', color: 'emerald' },
+                  { id: 'tools-templates', icon: FiPercent, title: 'Mẫu email & kịch bản trả lời', desc: 'Hệ thống Email Template với preview, emoji icon; chèn nhanh vào form gửi mail và tự tạo message trong hội thoại.', color: 'pink' },
+                  { id: 'tools-config', icon: FiTruck, title: 'Cấu hình Social Networks', desc: 'Cấu hình tập trung Facebook, Instagram, Telegram, Gmail, Outlook với metadata JSONB và màn hình quản lý hiện đại.', color: 'indigo' },
+                  { id: 'tools-dashboard', icon: FiDollarSign, title: 'Dashboard & Employee Dashboard', desc: 'Dashboard admin và dashboard nhân viên với thống kê cuộc hội thoại, tin nhắn, CSI, hiệu suất theo kênh và agent.', color: 'amber' }
+                ].map((card, idx) => {
+                  const Icon = card.icon
+                  return (
+                    <motion.div
+                      key={card.id}
+                      initial={{ opacity: 0, y: 24 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5, delay: idx * 0.1 }}
+                      className="group relative rounded-2xl bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl border border-white/20 p-6 lg:p-8 hover:border-white/40 transition-all duration-300 overflow-hidden"
+                    >
+                      <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-${card.color}-500/10 to-${card.color}-600/10 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
+                      <div className="relative">
+                        <div className="flex items-start gap-4 mb-4">
+                          <div className={`solutions-sub-icon p-2.5 rounded-lg bg-gradient-to-br from-${card.color}-400/20 to-${card.color}-500/20 border border-${card.color}-400/30`}>
+                            <Icon className={`w-5 h-5 text-${card.color}-400`} />
+                          </div>
+                          <h3 className="text-xl font-bold text-white flex-1">{card.title}</h3>
+                        </div>
+                        <p className="text-white/70 text-sm leading-relaxed mt-1">{card.desc}</p>
                       </div>
-                      <h3 className="text-xl font-bold text-white flex-1">{card.title}</h3>
-                    </div>
-                    <p className="text-white/70 text-sm leading-relaxed mt-1">{card.desc}</p>
-                  </div>
-                </motion.div>
-              )
-            })}
-          </div>
+                    </motion.div>
+                  )
+                })}
+              </div>
+            </div>
+          </motion.div>
 
           {/* CSI Section - Enhanced */}
           <motion.div 
@@ -549,14 +606,14 @@ const Solutions = () => {
             whileInView={{ opacity: 1, y: 0 }} 
             viewport={{ once: true }} 
             transition={{ duration: 0.5 }}
-            className="group relative rounded-3xl bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl border border-white/20 p-8 lg:p-10 hover:border-yellow-400/50 transition-all duration-300 overflow-hidden"
+            className="group relative rounded-3xl bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl border border-white/20 p-8 lg:p-10 hover:border-yellow-400/50 transition-all duration-300 overflow-hidden scroll-mt-28 lg:scroll-mt-36"
           >
             <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-yellow-500/10 to-orange-500/10 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             
             <div className="relative">
               {/* Header */}
               <div className="flex items-center gap-4 mb-8">
-                <div className="p-3 rounded-xl bg-gradient-to-br from-yellow-400/20 to-orange-500/20 border border-yellow-400/30">
+                <div className="solutions-section-icon p-3 rounded-xl bg-gradient-to-br from-yellow-400/20 to-orange-500/20 border border-yellow-400/30">
                   <FiStar className="w-6 h-6 text-yellow-400" />
                 </div>
                 <div>
@@ -625,13 +682,12 @@ const Solutions = () => {
                     />
                   </div>
 
-                  {/* Formula Display */}
+                  {/* Chỉ hiển thị tổng điểm CSI, không lộ công thức chi tiết */}
                   <div className="p-6 rounded-2xl bg-gradient-to-br from-white/10 to-white/5 border border-white/20">
-                    <div className="text-white/80 mb-3">
-                      <BlockMath math={'CSI = 0.5\\times CSAT + 0.3\\times Resolution + 0.2\\times Speed'} />
-                    </div>
-                    <div className="text-white/60 font-mono text-sm bg-white/5 p-3 rounded-lg">
-                      Ví dụ: 0.5×{csat} + 0.3×{resolution} + 0.2×{speed} = <span className="text-yellow-400 font-bold text-lg">{csi}</span>
+                    <div className="text-white/80 mb-2 font-semibold">Điểm CSI tổng hợp</div>
+                    <div className="text-white/60 text-sm">
+                      Dựa trên độ hài lòng, tỷ lệ giải quyết và tốc độ phản hồi. Ví dụ này cho thấy khi bạn kéo các thanh bên trên,
+                      hệ thống sẽ tính ra một điểm CSI duy nhất để theo dõi trải nghiệm khách hàng.
                     </div>
                   </div>
                 </div>
@@ -665,255 +721,6 @@ const Solutions = () => {
                 </div>
               </div>
 
-              {/* Toggle Advanced Button */}
-              <div className="mt-10 flex justify-center">
-                <button 
-                  onClick={()=>setShowAdvanced((v)=>!v)} 
-                  className="group/btn px-6 py-3 rounded-full text-sm font-semibold bg-gradient-to-r from-white/10 to-white/5 border border-white/20 text-white hover:border-yellow-400/50 hover:from-yellow-400/10 hover:to-orange-500/10 transition-all duration-300 flex items-center gap-2"
-                >
-                  <FiChevronRight className={`w-4 h-4 transition-transform duration-300 ${showAdvanced ? 'rotate-90' : ''}`} />
-                  {showAdvanced ? 'Ẩn chi tiết công thức' : 'Xem chi tiết công thức'}
-                </button>
-              </div>
-
-              {/* Advanced Section */}
-              {showAdvanced && (
-            <div className="mt-10 grid lg:grid-cols-2 gap-8">
-              <div className="rounded-xl bg-white/5 border border-white/10 p-6">
-                <h4 className="text-xl font-semibold text-white mb-3">CSI theo cảm xúc và thời gian</h4>
-                <div className="grid sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-xs text-white/60 mb-1">Danh sách r_i (cường độ cảm xúc, [-1..1], cách nhau bởi dấu phẩy)</label>
-                    <textarea value={reiText} onChange={(e)=>setReiText(e.target.value)} rows={4} className="w-full rounded-lg bg-white/5 border border-white/10 px-3 py-2 text-sm text-white placeholder-white/40 outline-none" placeholder="-0.2, 0.6, 0.3, -0.1" />
-                  </div>
-                  <div>
-                    <label className="block text-xs text-white/60 mb-1">Danh sách Δt_i (giây từ tin nhắn tới hiện tại)</label>
-                    <textarea value={dtText} onChange={(e)=>setDtText(e.target.value)} rows={4} className="w-full rounded-lg bg-white/5 border border-white/10 px-3 py-2 text-sm text-white placeholder-white/40 outline-none" placeholder="3600, 7200, 86400, 172800" />
-                  </div>
-                </div>
-                <div className="grid sm:grid-cols-3 gap-4 mt-4">
-                  <div>
-                    <label className="block text-xs text-white/60 mb-1">n_msg (tổng tin nhắn)</label>
-                    <input type="number" value={nmsgInput} onChange={(e)=>setNmsgInput(parseInt(e.target.value||'0'))} className="w-full rounded-lg bg-white/5 border border-white/10 px-3 py-2 text-sm text-white outline-none" />
-                  </div>
-                  <div>
-                    <label className="block text-xs text-white/60 mb-1">n_gap (khoảng trống lớn)</label>
-                    <input type="number" value={ngapInput} onChange={(e)=>setNgapInput(parseInt(e.target.value||'0'))} className="w-full rounded-lg bg-white/5 border border-white/10 px-3 py-2 text-sm text-white outline-none" />
-                  </div>
-                  <div className="text-xs text-white/60 flex items-end">ne tính từ độ dài ngắn hơn của 2 danh sách</div>
-                </div>
-                <div className="grid sm:grid-cols-3 gap-4 mt-4">
-                  <div>
-                    <label className="block text-xs text-white/60 mb-1">λ (lambda)</label>
-                    <input type="number" step="0.1" value={lambdaVal} onChange={(e)=>setLambdaVal(parseFloat(e.target.value||'0'))} className="w-full rounded-lg bg-white/5 border border-white/10 px-3 py-2 text-sm text-white outline-none" />
-                  </div>
-                  <div>
-                    <label className="block text-xs text-white/60 mb-1">α (alpha)</label>
-                    <input type="number" step="0.1" value={alphaVal} onChange={(e)=>setAlphaVal(parseFloat(e.target.value||'0'))} className="w-full rounded-lg bg-white/5 border border-white/10 px-3 py-2 text-sm text-white outline-none" />
-                  </div>
-                  <div>
-                    <label className="block text-xs text-white/60 mb-1">β (beta)</label>
-                    <input type="number" step="0.000001" value={betaVal} onChange={(e)=>setBetaVal(parseFloat(e.target.value||'0'))} className="w-full rounded-lg bg-white/5 border border-white/10 px-3 py-2 text-sm text-white outline-none" />
-                  </div>
-                </div>
-                <div className="mt-3 text-xs text-white/60">
-                  <span className="mr-3">ne = {neCalc}</span>
-                  <span className="mr-3">n̄e = {Math.max(0, nmsgInput - neCalc)}</span>
-                </div>
-              </div>
-              <div className="rounded-xl bg-white/5 border border-white/10 p-6 flex items-center justify-center">
-                <div className="space-y-4 text-center">
-                  <div className="relative w-44 h-44 mx-auto">
-                    <div
-                      className="absolute inset-0 rounded-full"
-                      style={{ background: `conic-gradient(#22d3ee ${((csiEmo+1)/2)*360}deg, rgba(255,255,255,0.08) 0)` }}
-                    />
-                    <div className="absolute inset-3 rounded-full bg-[#0a1128] flex items-center justify-center border border-white/10">
-                      <div>
-                        <div className="text-3xl font-black text-white">{csiEmo.toFixed(2)}</div>
-                        <div className="text-xs uppercase tracking-wide text-white/60">CSI (emo)</div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="text-sm text-white/80">Mức: <span className="font-semibold">{interp(csiEmo)}</span></div>
-                </div>
-              </div>
-            </div>
-            )}
-            {/* CSI detailed formula */}
-            {showAdvanced && (
-            <div className="mt-10 grid lg:grid-cols-2 gap-8">
-              <div className="rounded-xl bg-white/5 border border-white/10 p-6">
-                <h4 className="text-xl font-semibold text-white mb-3">Chi tiết công thức CSI (Cảm xúc + trọng số thời gian)</h4>
-                <ul className="list-disc list-inside text-white/80 space-y-1 mb-4">
-                  <li>Số tin nhắn khách hàng trong 1 tháng <span className="font-mono">n_msg</span></li>
-                  <li>Khoảng cách giữa các tin nhắn theo giây (để tính <span className="font-mono">Δt</span>)</li>
-                  <li>Số tin nhắn có cảm xúc tiêu cực/căng thẳng trong 1 tháng <span className="font-mono">n_e</span></li>
-                  <li>Số tin nhắn không gán nhãn cảm xúc <span className="font-mono">n̄_e</span> (<span className="font-mono">n̄_e + n_e = n_msg</span>)</li>
-                  <li>Tập cảm xúc khách hàng <span className="font-mono">n_emotion</span>, mỗi giá trị trong khoảng <span className="font-mono">[-1, 1]</span></li>
-                </ul>
-                <div className="rounded-lg bg-[#0b1533] border border-white/10 p-4 overflow-x-auto">
-                  <div className="text-white">
-                    <BlockMath math={'CSI = \\frac{\\sum_{i=1}^{n_e} (r_i \\cdot w_{t_i})}{\\sum_{i=1}^{n_e} w_{t_i} + \\lambda \\cdot (\\bar{n}_e + \\alpha \\cdot n_{gap})}'} />
-                    <div className="mt-3">
-                      <BlockMath math={'w_{t_i} = e^{-\\beta \\cdot \\Delta t_i}'} />
-                    </div>
-                  </div>
-                </div>
-                <div className="mt-3 space-y-1 text-white/80 text-sm">
-                  <div>• <span className="font-mono">rᵢ</span>: cường độ cảm xúc của tin nhắn i, <span className="font-mono">rᵢ ∈ [-1,1]</span></div>
-                  <div>• <span className="font-mono">wᵢ</span>: trọng số thời gian ưu tiên tin nhắn gần đây, <span className="font-mono">wᵢ = e^(−β·Δtᵢ)</span>, <span className="font-mono">Δtᵢ</span>: giây từ tin nhắn i đến hiện tại</div>
-                  <div>• <span className="font-mono">n_e</span>: số tin nhắn có cảm xúc</div>
-                  <div>• <span className="font-mono">n̄_e</span>: số tin nhắn không có cảm xúc, <span className="font-mono">n̄_e = n_msg − n_e</span></div>
-                  <div>• <span className="font-mono">n_gap</span>: số khoảng trống lớn giữa các tin nhắn (<span className="font-mono">Δt &gt; T_threshold</span>, ví dụ 1 ngày = 86400s)</div>
-                  <div>• <span className="font-mono">λ, α, β</span>: hệ số hiệu chỉnh (khuyến nghị: <span className="font-mono">λ=0.3</span>, <span className="font-mono">α=0.5</span>, <span className="font-mono">β=1e−6</span>)</div>
-                </div>
-              </div>
-              <div className="rounded-xl bg-white/5 border border-white/10 p-6">
-                <h4 className="text-xl font-semibold text-white mb-3">Bảng diễn giải thực tế của CSI</h4>
-                <div className="overflow-x-auto">
-                  <table className="w-full text-left text-sm text-white/80 border-separate" style={{borderSpacing: 0}}>
-                    <thead>
-                      <tr className="text-white">
-                        <th className="border-b border-white/20 py-2 px-3">Khoảng CSI</th>
-                        <th className="border-b border-white/20 py-2 px-3">Mức độ hài lòng</th>
-                        <th className="border-b border-white/20 py-2 px-3">Diễn giải</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td className="border-b border-white/10 py-2 px-3">[0.7, 1.0]</td>
-                        <td className="border-b border-white/10 py-2 px-3">Rất hài lòng</td>
-                        <td className="border-b border-white/10 py-2 px-3">Cảm xúc rất tích cực, tương tác gần đây chủ động, có khả năng giới thiệu.</td>
-                      </tr>
-                      <tr>
-                        <td className="border-b border-white/10 py-2 px-3">[0.3, 0.7)</td>
-                        <td className="border-b border-white/10 py-2 px-3">Hài lòng</td>
-                        <td className="border-b border-white/10 py-2 px-3">Tích cực chiếm ưu thế, ít phàn nàn, khách ổn định.</td>
-                      </tr>
-                      <tr>
-                        <td className="border-b border-white/10 py-2 px-3">[−0.3, 0.3)</td>
-                        <td className="border-b border-white/10 py-2 px-3">Trung lập</td>
-                        <td className="border-b border-white/10 py-2 px-3">Cảm xúc pha trộn/yếu, tương tác thấp hoặc phản hồi cân bằng.</td>
-                      </tr>
-                      <tr>
-                        <td className="border-b border-white/10 py-2 px-3">[−0.7, −0.3)</td>
-                        <td className="border-b border-white/10 py-2 px-3">Không hài lòng</td>
-                        <td className="border-b border-white/10 py-2 px-3">Tiêu cực chiếm ưu thế, nguy cơ rời bỏ sớm, cần can thiệp.</td>
-                      </tr>
-                      <tr>
-                        <td className="py-2 px-3">[−1.0, −0.7)</td>
-                        <td className="py-2 px-3">Rất không hài lòng</td>
-                        <td className="py-2 px-3">Tiêu cực mạnh, rủi ro rời bỏ cao, có thể để lại đánh giá xấu.</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-            )}
-            </div>
-          </motion.div>
-
-          {/* KPI Section - Enhanced */}
-          <motion.div 
-            id="kpi" 
-            initial={{ opacity: 0, y: 24 }} 
-            whileInView={{ opacity: 1, y: 0 }} 
-            viewport={{ once: true }} 
-            transition={{ duration: 0.5 }}
-            className="group relative rounded-3xl bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl border border-white/20 p-8 lg:p-10 hover:border-indigo-400/50 transition-all duration-300 overflow-hidden"
-          >
-            <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-indigo-500/10 to-purple-500/10 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-            
-            <div className="relative">
-              {/* Header */}
-              <div className="flex items-center gap-4 mb-10">
-                <div className="p-3 rounded-xl bg-gradient-to-br from-indigo-400/20 to-purple-500/20 border border-indigo-400/30">
-                  <FiBookOpen className="w-6 h-6 text-indigo-400" />
-                </div>
-                <div>
-                  <h3 className="text-3xl font-bold text-white">Công thức & KPI</h3>
-                  <p className="text-white/60 text-sm">Các chỉ số đo lường hiệu quả kinh doanh và vận hành</p>
-                </div>
-              </div>
-
-              {/* KPI Grid */}
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-                {[
-                  { 
-                    title: 'Độ hài lòng khách hàng', 
-                    formula: 'CSAT = (Số phản hồi Hài lòng / Tổng phản hồi) × 100%',
-                    color: 'cyan'
-                  },
-                  { 
-                    title: 'Chỉ số khuyến nghị', 
-                    formula: 'NPS = ((% Người ủng hộ − % Người phản đối)) × 100%',
-                    note: 'Ủng hộ: 9–10, Trung lập: 7–8, Phản đối: 0–6',
-                    color: 'blue'
-                  },
-                  { 
-                    title: 'Tỷ lệ giải quyết', 
-                    formula: 'TL = (Số yêu cầu đã giải quyết / Tổng yêu cầu) × 100%',
-                    color: 'emerald'
-                  },
-                  { 
-                    title: 'Thời gian phản hồi đầu tiên', 
-                    formula: 'TGPĐ = Tổng thời gian phản hồi đầu tiên / Số hội thoại',
-                    color: 'violet'
-                  },
-                  { 
-                    title: 'Thời gian xử lý trung bình', 
-                    formula: 'TGXL = (Nói chuyện + Chờ + Kết thúc) / Số tương tác',
-                    color: 'purple'
-                  },
-                  { 
-                    title: 'Đạt cam kết dịch vụ', 
-                    formula: 'SLA% = (Số phản hồi đúng hạn / Tổng phản hồi) × 100%',
-                    color: 'pink'
-                  },
-                  { 
-                    title: 'Tỷ lệ chuyển đổi', 
-                    formula: 'TL = (Số đơn hàng / Số khách hàng tiềm năng) × 100%',
-                    color: 'orange'
-                  },
-                  { 
-                    title: 'Tỷ lệ giữ chân khách hàng', 
-                    formula: 'Giữ chân = (KH cuối kỳ − KH mới) / KH đầu kỳ × 100%',
-                    color: 'amber'
-                  },
-                  { 
-                    title: 'Giá trị trọn đời khách hàng', 
-                    formula: 'GTTĐ = Doanh thu TB × Biên lợi nhuận × Thời gian gắn bó',
-                    color: 'green'
-                  }
-                ].map((kpi, idx) => (
-                  <motion.div
-                    key={kpi.title}
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.3, delay: idx * 0.05 }}
-                    className="group/kpi relative rounded-2xl bg-gradient-to-br from-white/10 to-white/5 border border-white/10 p-6 hover:border-white/30 hover:from-white/15 hover:to-white/10 transition-all duration-300"
-                  >
-                    <div className={`absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-${kpi.color}-500/20 to-${kpi.color}-600/10 rounded-full blur-2xl opacity-0 group-hover/kpi:opacity-100 transition-opacity duration-300`} />
-                    <div className="relative">
-                      <div className="flex items-center gap-3 mb-4">
-                        <div className={`w-2 h-2 rounded-full bg-${kpi.color}-400`} />
-                        <h4 className="font-bold text-white text-lg">{kpi.title}</h4>
-                      </div>
-                      <div className="font-mono text-sm text-white/70 leading-relaxed mb-3">
-                        {kpi.formula}
-                      </div>
-                      {kpi.note && (
-                        <div className="text-xs text-white/50 mt-2 pt-2 border-t border-white/10">
-                          {kpi.note}
-                        </div>
-                      )}
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
             </div>
           </motion.div>
         </div>

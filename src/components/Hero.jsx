@@ -4,22 +4,41 @@ import { FaRocket, FaCheckCircle, FaPlay, FaFacebook, FaTelegram, FaEnvelope, Fa
 import { SiZalo, SiShopee } from 'react-icons/si'
 import Navbar from './Navbar'
 
-const IconCard = ({ Icon, color, name, size = 'md' }) => {
+const IconCard = ({ Icon, color, name, size = 'md', theme = 'dark', imgSrc }) => {
   const w = size === 'lg' ? 'w-24 h-24' : 'w-20 h-20'
   const iconSize = size === 'lg' ? 'w-12 h-12' : 'w-10 h-10'
+  const backgroundColor = theme === 'light' ? 'rgba(255,255,255,0.96)' : `${color}12`
+  const boxShadow =
+    theme === 'light'
+      ? '0 18px 45px rgba(15,23,42,0.06)'
+      : `0 18px 55px ${color}35`
+
+  const glowBackground =
+    theme === 'light'
+      ? 'radial-gradient(circle at 50% 50%, rgba(148,163,184,0.18), transparent 60%)'
+      : `radial-gradient(circle at 50% 50%, ${color}33, transparent 60%)`
+
   return (
     <div className="relative group">
       <motion.div
         className="absolute -inset-3 rounded-3xl blur-2xl opacity-80"
-        style={{ background: `radial-gradient(circle at 50% 50%, ${color}33, transparent 60%)` }}
-        animate={{ scale: [1, 1.05, 1], opacity: [0.6, 0.9, 0.6] }}
+        style={{ background: glowBackground }}
+        animate={{ scale: [1, 1.05, 1], opacity: [0.45, 0.8, 0.45] }}
         transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
       />
       <div
         className={`${w} relative rounded-2xl border border-white/25 backdrop-blur-2xl flex flex-col items-center justify-center shadow-2xl`}
-        style={{ backgroundColor: `${color}12`, boxShadow: `0 18px 55px ${color}35` }}
+        style={{ backgroundColor, boxShadow }}
       >
-        <Icon className={`${iconSize}`} style={{ color }} />
+        {imgSrc ? (
+          <img
+            src={imgSrc}
+            alt={name}
+            className={`${iconSize} object-contain`}
+          />
+        ) : (
+          <Icon className={`${iconSize}`} style={{ color }} />
+        )}
         <span className="text-white text-[10px] font-semibold opacity-0 group-hover:opacity-100 transition-opacity mt-1">
           {name}
         </span>
@@ -28,7 +47,7 @@ const IconCard = ({ Icon, color, name, size = 'md' }) => {
   )
 }
 
-const ChannelPanel = () => {
+const ChannelPanel = ({ theme }) => {
   const [rx, setRx] = useState(0)
   const [ry, setRy] = useState(0)
   const [gx, setGx] = useState(50)
@@ -38,7 +57,7 @@ const ChannelPanel = () => {
     { Icon: FaInstagram, color: '#E4405F', name: 'Instagram' },
     { Icon: FaTelegram, color: '#2AABEE', name: 'Telegram' },
     { Icon: FaEnvelope, color: '#EA4335', name: 'Gmail' },
-    { Icon: SiZalo, color: '#0068FF', name: 'Zalo' },
+    { Icon: SiZalo, color: '#0068FF', name: 'Zalo', imgSrc: '/img/zalo-logo.png' },
     { Icon: FaWhatsapp, color: '#25D366', name: 'WhatsApp' },
   ]
   const onMove = (e) => {
@@ -58,12 +77,24 @@ const ChannelPanel = () => {
       <motion.div
         onMouseMove={onMove}
         onMouseLeave={onLeave}
-        style={{ transform: `perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg)` }}
+        style={{
+          transform: `perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg)` ,
+          backgroundColor: theme === 'light' ? 'rgba(255,255,255,0.96)' : undefined,
+          boxShadow:
+            theme === 'light'
+              ? '0 24px 60px rgba(15,23,42,0.08)'
+              : '0 40px 120px rgba(0,0,0,0.35)'
+        }}
         className="relative w-[460px] max-w-[92vw] rounded-3xl border border-white/15 bg-white/[0.04] backdrop-blur-xl shadow-[0_40px_120px_rgba(0,0,0,0.35)]"
       >
         <div
           className="absolute inset-0 rounded-3xl pointer-events-none"
-          style={{ background: `radial-gradient(600px at ${gx}% ${gy}%, rgba(59,130,246,0.18), transparent 60%)` }}
+          style={{
+            background:
+              theme === 'light'
+                ? `radial-gradient(600px at ${gx}% ${gy}%, rgba(148,163,184,0.16), transparent 60%)`
+                : `radial-gradient(600px at ${gx}% ${gy}%, rgba(59,130,246,0.18), transparent 60%)`
+          }}
         />
         <div className="p-6">
           <div className="flex items-center justify-between mb-5">
@@ -77,9 +108,15 @@ const ChannelPanel = () => {
                 whileHover={{ y: -4, scale: 1.03 }}
                 transition={{ type: 'spring', stiffness: 300, damping: 20 }}
                 className="p-4 rounded-2xl border border-white/15 bg-white/[0.06] backdrop-blur-md text-center"
-                style={{ boxShadow: `0 12px 40px ${c.color}25` }}
+                style={{
+                  boxShadow:
+                    theme === 'light'
+                      ? '0 18px 45px rgba(15,23,42,0.06)'
+                      : `0 12px 40px ${c.color}25`,
+                  backgroundColor: theme === 'light' ? 'rgba(255,255,255,0.96)' : undefined
+                }}
               >
-                <IconCard Icon={c.Icon} color={c.color} name={c.name} size="md" />
+                <IconCard Icon={c.Icon} color={c.color} name={c.name} size="md" theme={theme} imgSrc={c.imgSrc} />
               </motion.div>
             ))}
           </div>
@@ -90,10 +127,10 @@ const ChannelPanel = () => {
   )
 }
 
-const Hero = () => {
+const Hero = ({ theme, onToggleTheme }) => {
   return (
     <>
-      <Navbar />
+      <Navbar theme={theme} onToggleTheme={onToggleTheme} />
       <section id="hero" className="relative min-h-screen w-full overflow-hidden bg-gradient-to-br from-[#0a1128] via-[#0f1b3a] to-[#1a2847]">
         {/* Animated Background */}
         <div className="absolute inset-0 overflow-hidden">
@@ -190,7 +227,7 @@ const Hero = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.4 }}
-                  className="text-lg md:text-xl text-white/70 leading-relaxed max-w-2xl"
+                  className="text-lg md:text-xl text-white/80 leading-relaxed max-w-2xl hero-description"
                 >
                   Hợp nhất Facebook, Telegram, Gmail, Zalo vào một hộp thư thống nhất. 
                   Tự động hóa với AI, tăng hiệu suất 10x và nâng cao trải nghiệm khách hàng.
@@ -213,7 +250,7 @@ const Hero = () => {
                     <div className="flex-shrink-0 w-6 h-6 rounded-full bg-gradient-to-r from-cyan-400 to-blue-500 flex items-center justify-center">
                       <FaCheckCircle className="w-3.5 h-3.5 text-white" />
                     </div>
-                    <span className="text-white/90 font-medium">{feature}</span>
+                    <span className="text-white/90 font-medium hero-bullet-text">{feature}</span>
                   </div>
                 ))}
               </motion.div>
@@ -225,10 +262,15 @@ const Hero = () => {
                 transition={{ delay: 0.6 }}
                 className="flex flex-col sm:flex-row gap-4"
               >
-                <button className="group px-8 py-4 rounded-2xl bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold text-lg hover:shadow-2xl hover:shadow-cyan-500/50 transition-all hover:scale-105 flex items-center justify-center gap-2">
+                <a
+                  href="https://smile.cmcu.edu.vn/landing"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group px-8 py-4 rounded-2xl bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold text-lg hover:shadow-2xl hover:shadow-cyan-500/50 transition-all hover:scale-105 flex items-center justify-center gap-2"
+                >
                   Dùng thử miễn phí 14 ngày
                   <FaRocket className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </button>
+                </a>
                 <button className="group px-8 py-4 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 text-white font-semibold text-lg hover:bg-white/10 transition-all flex items-center justify-center gap-2">
                   <FaPlay className="w-4 h-4" />
                   Xem Demo
@@ -268,7 +310,7 @@ const Hero = () => {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="relative"
             >
-              <ChannelPanel />
+              <ChannelPanel theme={theme} />
             </motion.div>
           </div>
         </div>

@@ -34,7 +34,11 @@ const Management = () => {
   ]
 
   return (
-    <section ref={ref} className="relative py-20 px-4 bg-gradient-to-b from-transparent to-blue-500/5">
+    <section
+      id="management"
+      ref={ref}
+      className="relative py-20 px-4 bg-gradient-to-b from-transparent to-blue-500/5"
+    >
       <div className="container mx-auto max-w-7xl">
         {/* Header */}
         <motion.div

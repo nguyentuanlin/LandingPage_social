@@ -11,18 +11,63 @@ import Footer from './components/Footer'
 
 function App() {
   const [showScrollTop, setShowScrollTop] = useState(false)
+  const [theme, setTheme] = useState('dark')
+
+  useEffect(() => {
+    // Khởi tạo theme từ localStorage hoặc system preference
+    try {
+      const saved = window.localStorage.getItem('theme')
+      if (saved === 'light' || saved === 'dark') {
+        setTheme(saved)
+        return
+      }
+    } catch (e) {
+      // ignore
+    }
+
+    if (window.matchMedia) {
+      const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches
+      setTheme(prefersLight ? 'light' : 'dark')
+    } else {
+      setTheme('dark')
+    }
+  }, [])
+
+  useEffect(() => {
+    // Áp dụng theme lên thẻ html để CSS có thể override
+    const root = document.documentElement
+    root.dataset.theme = theme
+    try {
+      window.localStorage.setItem('theme', theme)
+    } catch (e) {
+      // ignore
+    }
+  }, [theme])
 
   useEffect(() => {
     const handleScroll = () => {
-      setShowScrollTop(window.scrollY > 500)
+      const scrollTop =
+        window.scrollY ||
+        window.pageYOffset ||
+        document.documentElement.scrollTop ||
+        document.body.scrollTop ||
+        0
+
+      // Hiện nút scroll-to-top sớm hơn để dễ thấy hơn
+      setShowScrollTop(scrollTop > 200)
     }
 
+    handleScroll()
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
+  const toggleTheme = () => {
+    setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'))
   }
 
   return (
@@ -45,13 +90,13 @@ function App() {
 
       {/* Main Content */}
       <div className="relative z-10">
-        <Hero />
-        <AIFeatures />
-        <Solutions />
-        <OmniChannel />
-        <Management />
-        <Pricing />
-        <Footer />
+        <Hero theme={theme} onToggleTheme={toggleTheme} />
+        <AIFeatures theme={theme} />
+        <Solutions theme={theme} />
+        <OmniChannel theme={theme} />
+        <Management theme={theme} />
+        <Pricing theme={theme} />
+        <Footer theme={theme} />
       </div>
 
       {/* Scroll to Top Button */}

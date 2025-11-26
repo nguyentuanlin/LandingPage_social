@@ -7,9 +7,9 @@ const Footer = () => {
   const footerLinks = {
     'Sản phẩm': [
       { name: 'Tính năng', href: '#features' },
+      { name: 'Giải pháp', href: '#solutions' },
+      { name: 'Tích hợp đa kênh', href: '#omnichannel' },
       { name: 'Bảng giá', href: '#pricing' },
-      { name: 'Tích hợp', href: '#omnichannel' },
-      { name: 'Tài liệu API', href: '#' },
     ],
     'Công ty': [
       { name: 'Về chúng tôi', href: '#' },
@@ -39,18 +39,24 @@ const Footer = () => {
   ]
 
   return (
-    <footer className="relative pt-20 pb-10 px-4 border-t border-white/10">
-      <div className="container mx-auto max-w-7xl">
+    <footer id="site-footer" className="relative mt-24 pt-16 pb-10 px-4 border-t border-white/10 bg-gradient-to-b from-transparent via-[#050818] to-[#020414] overflow-hidden">
+      {/* Decorative gradient line */}
+      <div className="pointer-events-none absolute inset-x-0 -top-px h-px bg-gradient-to-r from-cyan-500/40 via-purple-500/40 to-blue-500/40" />
+      {/* Soft glow orbs */}
+      <div className="pointer-events-none absolute -top-32 -right-16 w-72 h-72 rounded-full bg-purple-500/15 blur-3xl" />
+      <div className="pointer-events-none absolute -bottom-32 left-0 w-80 h-80 rounded-full bg-cyan-500/10 blur-3xl" />
+
+      <div className="relative container mx-auto max-w-7xl">
         {/* Main Footer Content */}
         <div className="grid md:grid-cols-2 lg:grid-cols-6 gap-8 mb-12">
           {/* Brand Column */}
           <div className="lg:col-span-2">
-            <h3 className="text-3xl font-black text-gradient mb-4">
+            <h3 className="text-2xl md:text-3xl font-black text-gradient mb-3 tracking-tight">
               TLL OMNIAI
             </h3>
-            <p className="text-white/60 mb-6 leading-relaxed">
-              Nền tảng tương tác khách hàng đa kênh thông minh. 
-              Hợp nhất cuộc hội thoại, tự động hóa với AI và làm hài lòng khách hàng của bạn.
+            <p className="text-white/70 mb-6 leading-relaxed text-sm md:text-base">
+              Nền tảng tương tác khách hàng đa kênh thông minh.
+              Hợp nhất hội thoại, AI trả lời tự động và báo cáo hiệu suất để đội CSKH vận hành gọn nhẹ hơn.
             </p>
             
             {/* Contact Info */}
@@ -73,15 +79,18 @@ const Footer = () => {
           {/* Links Columns */}
           {Object.entries(footerLinks).map(([category, links]) => (
             <div key={category}>
-              <h4 className="text-white font-bold mb-4">{category}</h4>
+              <h4 className="text-white font-semibold mb-4 text-sm tracking-wide uppercase">
+                {category}
+              </h4>
               <ul className="space-y-2">
                 {links.map((link) => (
                   <li key={link.name}>
                     <a
                       href={link.href}
-                      className="text-white/60 hover:text-white transition-colors text-sm"
+                      className="text-white/60 hover:text-white transition-colors text-sm flex items-center gap-1"
                     >
-                      {link.name}
+                      <span className="w-1 h-1 rounded-full bg-white/30 group-hover:bg-white/70 hidden sm:inline-block" />
+                      <span>{link.name}</span>
                     </a>
                   </li>
                 ))}
@@ -91,21 +100,21 @@ const Footer = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 border-t border-white/10">
+        <div className="pt-6 border-t border-white/10">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             {/* Copyright */}
-            <p className="text-white/60 text-sm">
+            <p className="text-white/60 text-xs md:text-sm">
               © {currentYear} TLL OmniAI. Bảo lưu mọi quyền.
             </p>
 
             {/* Social Links */}
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-3">
               {socialLinks.map((social) => (
                 <a
                   key={social.label}
                   href={social.href}
                   aria-label={social.label}
-                  className="w-10 h-10 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center text-white/60 hover:text-white transition-all"
+                  className="w-9 h-9 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center text-white/60 hover:text-white transition-all border border-white/5 hover:border-white/30 shadow-sm hover:shadow-lg"
                 >
                   {social.icon}
                 </a>
