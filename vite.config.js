@@ -5,7 +5,7 @@ import react from '@vitejs/plugin-react'
 const repo = process.env.GITHUB_REPOSITORY ? process.env.GITHUB_REPOSITORY.split('/').pop() : ''
 // If deploying to user/organization pages (username.github.io), base must be '/'
 const isUserPage = repo && /\.github\.io$/i.test(repo)
-const base = repo && !isUserPage ? `/${repo}/` : '/'
+const base = '/'
 
 export default defineConfig({
   base,
