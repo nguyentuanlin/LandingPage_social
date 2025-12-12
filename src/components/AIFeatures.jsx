@@ -2,36 +2,59 @@ import React, { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { FaRobot, FaComments, FaMicrophone, FaClock } from 'react-icons/fa'
 
-const AIFeatures = () => {
+const AIFeatures = ({ language = 'vi' }) => {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, amount: 0.2 })
 
-  const features = [
+  const isEn = language === 'en'
+
+  const baseFeatures = [
     {
+      key: 'unified_inbox',
       icon: <FaComments className="w-8 h-8" />,
-      title: 'Hộp thư thống nhất',
-      description: 'Quản lý hội thoại từ 6+ kênh trong một bảng điều khiển tập trung. Không bỏ lỡ tin nhắn nào.',
-      color: '#3b82f6'
+      color: '#3b82f6',
+      titleVi: 'Hộp thư thống nhất',
+      descVi: 'Quản lý hội thoại từ 6+ kênh trong một bảng điều khiển tập trung. Không bỏ lỡ tin nhắn nào.',
+      titleEn: 'Unified inbox',
+      descEn: 'Manage conversations from 6+ channels in a single dashboard. Never miss any message.',
     },
     {
+      key: 'ai_reply',
       icon: <FaRobot className="w-8 h-8" />,
-      title: 'AI tự động trả lời',
-      description: 'Phản hồi thông minh được hỗ trợ bởi công nghệ RAG. Câu trả lời nhận biết ngữ cảnh từ cơ sở tri thức của bạn.',
-      color: '#8b5cf6'
+      color: '#8b5cf6',
+      titleVi: 'AI tự động trả lời',
+      descVi:
+        'Phản hồi thông minh được hỗ trợ bởi công nghệ RAG. Câu trả lời nhận biết ngữ cảnh từ cơ sở tri thức của bạn.',
+      titleEn: 'AI auto‑reply',
+      descEn:
+        'Intelligent replies powered by RAG. Answers understand context from your own knowledge base.',
     },
     {
+      key: 'stt',
       icon: <FaMicrophone className="w-8 h-8" />,
-      title: 'Chuyển giọng nói thành văn bản',
-      description: 'Tự động chuyển đổi tin nhắn thoại bằng Google Cloud Speech-to-Text API.',
-      color: '#10b981'
+      color: '#10b981',
+      titleVi: 'Chuyển giọng nói thành văn bản',
+      descVi: 'Tự động chuyển đổi tin nhắn thoại bằng Google Cloud Speech‑to‑Text API.',
+      titleEn: 'Voice‑to‑text',
+      descEn: 'Automatically convert voice messages to text using speech‑to‑text technology.',
     },
     {
+      key: 'scheduled',
       icon: <FaClock className="w-8 h-8" />,
-      title: 'Tin nhắn định lịch',
-      description: 'Lên lịch gửi tin trên nhiều kênh. Tin nhắn tự động với cron jobs.',
-      color: '#f59e0b'
+      color: '#f59e0b',
+      titleVi: 'Tin nhắn định lịch',
+      descVi: 'Lên lịch gửi tin trên nhiều kênh. Tin nhắn tự động với cron jobs.',
+      titleEn: 'Scheduled messages',
+      descEn: 'Schedule messages across channels. Automate campaigns with flexible schedules.',
     },
   ]
+
+  const features = baseFeatures.map((f) => ({
+    icon: f.icon,
+    color: f.color,
+    title: isEn ? f.titleEn : f.titleVi,
+    description: isEn ? f.descEn : f.descVi,
+  }))
 
   return (
     <section
@@ -48,14 +71,15 @@ const AIFeatures = () => {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            Hội thoại thông minh với{' '}
+            {isEn ? 'Smart conversations with ' : 'Hội thoại thông minh với '}
             <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
               AI
             </span>
           </h2>
           <p className="text-lg md:text-xl text-white/70 max-w-3xl mx-auto">
-            Tận dụng công nghệ AI để tự động hóa quy trình, tối ưu trải nghiệm khách hàng, 
-            và tăng doanh thu đa kênh hiệu quả.
+            {isEn
+              ? 'Leverage AI to automate workflows, optimize customer experiences, and grow revenue across all channels.'
+              : 'Tận dụng công nghệ AI để tự động hóa quy trình, tối ưu trải nghiệm khách hàng, và tăng doanh thu đa kênh hiệu quả.'}
           </p>
         </motion.div>
 
@@ -108,32 +132,32 @@ const AIFeatures = () => {
           className="mt-12 p-8 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10"
         >
           <h3 className="text-2xl font-bold text-white mb-4 text-center">
-            Thêm nhiều tính năng thông minh
+            {isEn ? 'More intelligent features' : 'Thêm nhiều tính năng thông minh'}
           </h3>
           <div className="grid md:grid-cols-3 gap-4 text-white/70">
             <div className="flex items-center gap-2">
               <span className="text-green-400">✓</span>
-              <span>Chỉ số hài lòng khách hàng (CSI)</span>
+              <span>{isEn ? 'Customer satisfaction index (CSI)' : 'Chỉ số hài lòng khách hàng (CSI)'}</span>
             </div>
             <div className="flex items-center gap-2">
               <span className="text-green-400">✓</span>
-              <span>Mẫu tin nhắn nhanh</span>
+              <span>{isEn ? 'Quick reply templates' : 'Mẫu tin nhắn nhanh'}</span>
             </div>
             <div className="flex items-center gap-2">
               <span className="text-green-400">✓</span>
-              <span>Ghi chú & Lịch sử khách hàng</span>
+              <span>{isEn ? 'Customer notes & history' : 'Ghi chú & Lịch sử khách hàng'}</span>
             </div>
             <div className="flex items-center gap-2">
               <span className="text-green-400">✓</span>
-              <span>Quản lý nhãn & thẻ</span>
+              <span>{isEn ? 'Label & tag management' : 'Quản lý nhãn & thẻ'}</span>
             </div>
             <div className="flex items-center gap-2">
               <span className="text-green-400">✓</span>
-              <span>Cập nhật thời gian thực (3-5s)</span>
+              <span>{isEn ? 'Realtime updates (3–5s)' : 'Cập nhật thời gian thực (3-5s)'}</span>
             </div>
             <div className="flex items-center gap-2">
               <span className="text-green-400">✓</span>
-              <span>Hỗ trợ đa ngôn ngữ</span>
+              <span>{isEn ? 'Multi‑language support' : 'Hỗ trợ đa ngôn ngữ'}</span>
             </div>
           </div>
         </motion.div>

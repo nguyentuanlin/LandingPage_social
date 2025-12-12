@@ -2,9 +2,11 @@ import React, { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { FaCheck } from 'react-icons/fa'
 
-const Pricing = ({ theme = 'dark' }) => {
+const Pricing = ({ theme = 'dark', language = 'vi' }) => {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, amount: 0.2 })
+
+  const isEn = language === 'en'
 
   const plans = [
     {
@@ -41,13 +43,28 @@ const Pricing = ({ theme = 'dark' }) => {
         >
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
             <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
-              Dùng miễn phí
+              {isEn ? 'Use for free' : 'Dùng miễn phí'}
             </span>{' '}
-            cho tất cả nhà cung cấp
+            {isEn ? 'for all providers' : 'cho tất cả nhà cung cấp'}
           </h2>
           <p className="text-lg md:text-xl text-white/70 max-w-3xl mx-auto">
-            Trong giai đoạn khởi động, chúng tôi mở toàn bộ hệ thống cho mọi doanh nghiệp sử dụng <span className="font-semibold text-white">hoàn toàn miễn phí</span>. 
-            Khi bắt đầu thu phí, bảng giá sẽ được công bố rõ ràng và minh bạch trước đó.
+            {isEn
+              ? (
+                <>
+                  During the launch phase, we open the entire system for every business to use
+                  {' '}
+                  <span className="font-semibold text-white">completely free of charge</span>.
+                  {' '}When we start charging, pricing will be announced clearly and transparently in advance.
+                </>
+              )
+              : (
+                <>
+                  Trong giai đoạn khởi động, chúng tôi mở toàn bộ hệ thống cho mọi doanh nghiệp sử dụng
+                  {' '}
+                  <span className="font-semibold text-white">hoàn toàn miễn phí</span>.
+                  {' '}Khi bắt đầu thu phí, bảng giá sẽ được công bố rõ ràng và minh bạch trước đó.
+                </>
+              )}
           </p>
         </motion.div>
 
@@ -112,7 +129,7 @@ const Pricing = ({ theme = 'dark' }) => {
                     : 'bg-white/10 text-white hover:bg-white/20'
                 }`}
               >
-                Bắt đầu dùng miễn phí
+                {isEn ? 'Start using for free' : 'Bắt đầu dùng miễn phí'}
               </a>
             </motion.div>
           ))}

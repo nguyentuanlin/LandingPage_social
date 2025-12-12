@@ -2,9 +2,11 @@ import React, { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { FaFacebook, FaTelegram, FaEnvelope, FaWhatsapp, FaInstagram } from 'react-icons/fa'
 
-const OmniChannel = () => {
+const OmniChannel = ({ language = 'vi' }) => {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, amount: 0.2 })
+
+  const isEn = language === 'en'
 
   const channels = [
     {
@@ -66,14 +68,15 @@ const OmniChannel = () => {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            Tích hợp{' '}
+            {isEn ? 'Integrate ' : 'Tích hợp '}
             <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
-              đa kênh
+              {isEn ? 'multiple channels' : 'đa kênh'}
             </span>
           </h2>
           <p className="text-lg md:text-xl text-white/70 max-w-3xl mx-auto">
-            Kết nối Facebook, Telegram, Gmail, Zalo, Instagram và WhatsApp vào một hộp thư thống nhất. 
-            Tự động hóa phản hồi, định tuyến theo kỹ năng, quản lý SLA và đồng bộ cơ sở tri thức.
+            {isEn
+              ? 'Connect Facebook, Telegram, Gmail, Zalo, Instagram and WhatsApp into a unified inbox. Automate replies, route by skills, manage SLA and sync your knowledge base.'
+              : 'Kết nối Facebook, Telegram, Gmail, Zalo, Instagram và WhatsApp vào một hộp thư thống nhất. Tự động hóa phản hồi, định tuyến theo kỹ năng, quản lý SLA và đồng bộ cơ sở tri thức.'}
           </p>
         </motion.div>
 
@@ -134,12 +137,12 @@ const OmniChannel = () => {
           className="p-8 rounded-2xl bg-gradient-to-r from-blue-500/10 to-purple-500/10 backdrop-blur-sm border border-dashed border-white/20 text-center"
         >
           <h3 className="text-2xl font-bold text-white mb-2">
-            Hộp thư thống nhất + Trí tuệ nhân tạo
+            {isEn ? 'Unified inbox + Artificial intelligence' : 'Hộp thư thống nhất + Trí tuệ nhân tạo'}
           </h3>
           <p className="text-white/70 max-w-3xl mx-auto">
-            Hợp nhất tất cả cuộc hội thoại từ nhiều kênh vào một luồng thống nhất. 
-            Kết hợp RAG đa nguồn để phản hồi chính xác dựa trên ngữ cảnh, kịch bản từ khóa/ngoài giờ, 
-            và phân công cho nhân viên phù hợp.
+            {isEn
+              ? 'Merge all conversations from every channel into one unified flow. Combine multi‑source RAG to reply accurately based on context, keyword/out‑of‑hours scenarios and agent assignment.'
+              : 'Hợp nhất tất cả cuộc hội thoại từ nhiều kênh vào một luồng thống nhất. Kết hợp RAG đa nguồn để phản hồi chính xác dựa trên ngữ cảnh, kịch bản từ khóa/ngoài giờ, và phân công cho nhân viên phù hợp.'}
           </p>
         </motion.div>
       </div>

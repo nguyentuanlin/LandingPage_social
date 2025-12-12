@@ -13,6 +13,7 @@ import ConsultationWidget from './components/ConsultationWidget'
 function App() {
   const [showScrollTop, setShowScrollTop] = useState(false)
   const [theme, setTheme] = useState('dark')
+  const [language, setLanguage] = useState('vi')
 
   useEffect(() => {
     // Khởi tạo theme từ localStorage hoặc system preference
@@ -35,6 +36,18 @@ function App() {
   }, [])
 
   useEffect(() => {
+    // Khởi tạo ngôn ngữ từ localStorage
+    try {
+      const savedLang = window.localStorage.getItem('landing_language')
+      if (savedLang === 'vi' || savedLang === 'en') {
+        setLanguage(savedLang)
+      }
+    } catch (e) {
+      // ignore
+    }
+  }, [])
+
+  useEffect(() => {
     // Áp dụng theme lên thẻ html để CSS có thể override
     const root = document.documentElement
     root.dataset.theme = theme
@@ -44,6 +57,15 @@ function App() {
       // ignore
     }
   }, [theme])
+
+  useEffect(() => {
+    // Lưu ngôn ngữ hiện tại để lần sau vào lại vẫn giữ
+    try {
+      window.localStorage.setItem('landing_language', language)
+    } catch (e) {
+      // ignore
+    }
+  }, [language])
 
   useEffect(() => {
     const handleScroll = () => {
@@ -71,6 +93,12 @@ function App() {
     setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'))
   }
 
+  const handleChangeLanguage = (lang) => {
+    if (lang === 'vi' || lang === 'en') {
+      setLanguage(lang)
+    }
+  }
+
   return (
     <div className="relative min-h-screen overflow-x-hidden">
       {/* Background Effects */}
@@ -91,13 +119,18 @@ function App() {
 
       {/* Main Content */}
       <div className="relative z-10">
-        <Hero theme={theme} onToggleTheme={toggleTheme} />
-        <AIFeatures theme={theme} />
-        <Solutions theme={theme} />
-        <OmniChannel theme={theme} />
-        <Management theme={theme} />
-        <Pricing theme={theme} />
-        <Footer theme={theme} />
+        <Hero
+          theme={theme}
+          onToggleTheme={toggleTheme}
+          language={language}
+          onChangeLanguage={handleChangeLanguage}
+        />
+        <AIFeatures language={language} />
+        <Solutions theme={theme} language={language} />
+        <OmniChannel language={language} />
+        <Management language={language} />
+        <Pricing theme={theme} language={language} />
+        <Footer language={language} />
       </div>
 
       {/* Consultation Popup Widget */}

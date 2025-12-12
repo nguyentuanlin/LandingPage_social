@@ -47,11 +47,12 @@ const IconCard = ({ Icon, color, name, size = 'md', theme = 'dark', imgSrc }) =>
   )
 }
 
-const ChannelPanel = ({ theme }) => {
+const ChannelPanel = ({ theme, language = 'vi' }) => {
   const [rx, setRx] = useState(0)
   const [ry, setRy] = useState(0)
   const [gx, setGx] = useState(50)
   const [gy, setGy] = useState(50)
+  const isEn = language === 'en'
   const channels = [
     { Icon: FaFacebook, color: '#1877F2', name: 'Facebook' },
     { Icon: FaInstagram, color: '#E4405F', name: 'Instagram' },
@@ -98,7 +99,9 @@ const ChannelPanel = ({ theme }) => {
         />
         <div className="p-6">
           <div className="flex items-center justify-between mb-5">
-            <div className="text-white/70 text-sm font-medium">Tích hợp kênh</div>
+            <div className="text-white/70 text-sm font-medium">
+              {isEn ? 'Channel integrations' : 'Tích hợp kênh'}
+            </div>
             <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
           </div>
           <div className="grid grid-cols-3 gap-4">
@@ -127,10 +130,17 @@ const ChannelPanel = ({ theme }) => {
   )
 }
 
-const Hero = ({ theme, onToggleTheme }) => {
+const Hero = ({ theme, onToggleTheme, language = 'vi', onChangeLanguage }) => {
+  const isEn = language === 'en'
+
   return (
     <>
-      <Navbar theme={theme} onToggleTheme={onToggleTheme} />
+      <Navbar
+        theme={theme}
+        onToggleTheme={onToggleTheme}
+        language={language}
+        onChangeLanguage={onChangeLanguage}
+      />
       <section id="hero" className="relative min-h-screen w-full overflow-hidden bg-gradient-to-br from-[#0a1128] via-[#0f1b3a] to-[#1a2847]">
         {/* Animated Background */}
         <div className="absolute inset-0 overflow-hidden">
@@ -203,7 +213,9 @@ const Hero = ({ theme, onToggleTheme }) => {
                 className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-cyan-500/10 to-blue-500/10 border border-cyan-400/20 backdrop-blur-sm"
               >
                 <FaRocket className="w-4 h-4 text-cyan-400" />
-                <span className="text-sm font-semibold text-cyan-400">Nền tảng AI Omnichannel #1 Việt Nam</span>
+                <span className="text-sm font-semibold text-cyan-400">
+                  {isEn ? 'No.1 Omnichannel AI platform in Vietnam' : 'Nền tảng AI Omnichannel'}
+                </span>
               </motion.div>
 
               {/* Main Heading */}
@@ -214,13 +226,13 @@ const Hero = ({ theme, onToggleTheme }) => {
                   transition={{ delay: 0.3 }}
                   className="text-5xl md:text-6xl lg:text-7xl font-black leading-tight"
                 >
-                  <span className="text-white">Kết nối mọi</span>
+                  <span className="text-white">{isEn ? 'Connect every' : 'Kết nối mọi'}</span>
                   <br />
                   <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 bg-clip-text text-transparent">
-                    kênh tương tác
+                    {isEn ? 'interaction channel' : 'kênh tương tác'}
                   </span>
                   <br />
-                  <span className="text-white">với khách hàng</span>
+                  <span className="text-white">{isEn ? 'with your customers' : 'với khách hàng'}</span>
                 </motion.h1>
 
                 <motion.p
@@ -229,8 +241,9 @@ const Hero = ({ theme, onToggleTheme }) => {
                   transition={{ delay: 0.4 }}
                   className="text-lg md:text-xl text-white/80 leading-relaxed max-w-2xl hero-description"
                 >
-                  Hợp nhất Facebook, Telegram, Gmail, Zalo vào một hộp thư thống nhất. 
-                  Tự động hóa với AI, tăng hiệu suất 10x và nâng cao trải nghiệm khách hàng.
+                  {isEn
+                    ? 'Bring Facebook, Telegram, Gmail, Zalo into a single unified inbox. Automate with AI, boost productivity 10x and upgrade every customer experience.'
+                    : 'Hợp nhất Facebook, Telegram, Gmail, Zalo vào một hộp thư thống nhất. Tự động hóa với AI, tăng hiệu suất 10x và nâng cao trải nghiệm khách hàng.'}
                 </motion.p>
               </div>
 
@@ -241,11 +254,19 @@ const Hero = ({ theme, onToggleTheme }) => {
                 transition={{ delay: 0.5 }}
                 className="space-y-3"
               >
-                {[
-                  'Tích hợp đa kênh trong 5 phút',
-                  'AI tự động trả lời 24/7',
-                  'Tăng tỷ lệ chuyển đổi 300%'
-                ].map((feature, idx) => (
+                {(
+                  isEn
+                    ? [
+                        'Integrate multiple channels in 5 minutes',
+                        '24/7 AI auto‑reply',
+                        'Increase conversion rate by up to 300%',
+                      ]
+                    : [
+                        'Tích hợp đa kênh trong 5 phút',
+                        'AI tự động trả lời 24/7',
+                        'Tăng tỷ lệ chuyển đổi 300%',
+                      ]
+                ).map((feature, idx) => (
                   <div key={idx} className="flex items-center gap-3">
                     <div className="flex-shrink-0 w-6 h-6 rounded-full bg-gradient-to-r from-cyan-400 to-blue-500 flex items-center justify-center">
                       <FaCheckCircle className="w-3.5 h-3.5 text-white" />
@@ -268,13 +289,9 @@ const Hero = ({ theme, onToggleTheme }) => {
                   rel="noopener noreferrer"
                   className="group px-8 py-4 rounded-2xl bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold text-lg hover:shadow-2xl hover:shadow-cyan-500/50 transition-all hover:scale-105 flex items-center justify-center gap-2"
                 >
-                  Dùng thử miễn phí 14 ngày
+                  {isEn ? 'Start free trial' : 'Dùng thử miễn phí'}
                   <FaRocket className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </a>
-                <button className="group px-8 py-4 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 text-white font-semibold text-lg hover:bg-white/10 transition-all flex items-center justify-center gap-2">
-                  <FaPlay className="w-4 h-4" />
-                  Xem Demo
-                </button>
               </motion.div>
 
               {/* Social Proof */}
@@ -284,7 +301,9 @@ const Hero = ({ theme, onToggleTheme }) => {
                 transition={{ delay: 0.7 }}
                 className="pt-8 border-t border-white/10"
               >
-                <p className="text-white/50 text-sm mb-4">Được tin dùng bởi 500+ doanh nghiệp</p>
+                {/* <p className="text-white/50 text-sm mb-4">
+                  {isEn ? 'Trusted by 500+ businesses' : ''}
+                </p> */}
                 <div className="flex items-center gap-6">
                   <div className="flex -space-x-2">
                     {[1, 2, 3, 4, 5].map((i) => (
@@ -310,7 +329,7 @@ const Hero = ({ theme, onToggleTheme }) => {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="relative"
             >
-              <ChannelPanel theme={theme} />
+              <ChannelPanel theme={theme} language={language} />
             </motion.div>
           </div>
         </div>
@@ -322,7 +341,9 @@ const Hero = ({ theme, onToggleTheme }) => {
           transition={{ delay: 1.5 }}
           className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
         >
-          <span className="text-white/50 text-sm">Cuộn xuống để khám phá</span>
+          <span className="text-white/50 text-sm">
+            {isEn ? 'Scroll down to explore more' : 'Cuộn xuống để khám phá'}
+          </span>
           <motion.div
             animate={{ y: [0, 10, 0] }}
             transition={{ duration: 1.5, repeat: Infinity }}

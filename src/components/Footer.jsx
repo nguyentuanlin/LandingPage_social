@@ -1,8 +1,10 @@
 import React from 'react'
 import { FaFacebook, FaTwitter, FaLinkedin, FaGithub, FaEnvelope, FaPhone, FaMapMarkerAlt } from 'react-icons/fa'
 
-const Footer = () => {
+const Footer = ({ language = 'vi' }) => {
   const currentYear = new Date().getFullYear()
+
+  const isEn = language === 'en'
 
   const footerLinks = {
     'Sản phẩm': [
@@ -55,8 +57,9 @@ const Footer = () => {
               TLL OMNIAI
             </h3>
             <p className="text-white/70 mb-6 leading-relaxed text-sm md:text-base">
-              Nền tảng tương tác khách hàng đa kênh thông minh.
-              Hợp nhất hội thoại, AI trả lời tự động và báo cáo hiệu suất để đội CSKH vận hành gọn nhẹ hơn.
+              {isEn
+                ? 'An intelligent omni‑channel customer engagement platform. Unify conversations, AI auto‑replies and performance reports so your support team can operate lean and effectively.'
+                : 'Nền tảng tương tác khách hàng đa kênh thông minh. Hợp nhất hội thoại, AI trả lời tự động và báo cáo hiệu suất để đội CSKH vận hành gọn nhẹ hơn.'}
             </p>
             
             {/* Contact Info */}
@@ -104,7 +107,9 @@ const Footer = () => {
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             {/* Copyright */}
             <p className="text-white/60 text-xs md:text-sm">
-              © {currentYear} TLL OmniAI. Bảo lưu mọi quyền.
+              {isEn
+                ? `© ${currentYear} TLL OmniAI. All rights reserved.`
+                : `© ${currentYear} TLL OmniAI. Bảo lưu mọi quyền.`}
             </p>
 
             {/* Social Links */}

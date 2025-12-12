@@ -2,8 +2,9 @@ import React, { useState } from 'react'
 import { motion } from 'framer-motion'
 import { FaBars, FaTimes, FaSun, FaMoon } from 'react-icons/fa'
 
-const Navbar = ({ theme = 'dark', onToggleTheme }) => {
+const Navbar = ({ theme = 'dark', onToggleTheme, language = 'vi', onChangeLanguage }) => {
   const [isOpen, setIsOpen] = useState(false)
+  const isLight = theme === 'light'
 
   const menuItems = [
     { name: 'Giải pháp', href: '#solutions' },
@@ -19,22 +20,51 @@ const Navbar = ({ theme = 'dark', onToggleTheme }) => {
       animate={{ y: 0 }}
       transition={{ duration: 0.6 }}
       id="main-navbar"
-      className="fixed top-0 left-0 right-0 z-50 bg-slate-950/80 backdrop-blur-xl border-b border-white/10"
+      className={`fixed top-0 left-0 right-0 z-50 backdrop-blur-xl border-b ${
+        isLight ? 'bg-white/90 border-slate-200 shadow-sm' : 'bg-slate-950/80 border-white/10'
+      }`}
     >
       <div className="container mx-auto max-w-[1280px] px-5 md:px-8 lg:px-12 xl:px-16">
         <div className="flex items-center justify-between h-14 md:h-16">
-
-          {/* Desktop Menu */}
-          <div className="hidden md:flex items-center gap-6">
-            {menuItems.map((item) => (
-              <a
-                key={item.name}
-                href={item.href}
-                className="text-white/85 hover:text-white transition-colors text-sm font-medium"
+          <div className="flex items-center gap-4 md:gap-6">
+            <a
+              href="#hero"
+              className="flex items-center gap-2"
+            >
+              <div className="w-9 h-9 rounded-full bg-gradient-to-tr from-cyan-400 to-blue-500 p-[1px]">
+                <div className="w-full h-full rounded-full bg-slate-950 flex items-center justify-center overflow-hidden">
+                  <img
+                    src="/img/logoTLL.png"
+                    alt="TLL Logo"
+                    className="w-full h-full object-contain"
+                  />
+                </div>
+              </div>
+              <span
+                className={`hidden sm:inline text-base font-semibold tracking-wide ${
+                  isLight ? 'text-slate-900' : 'text-white/95'
+                }`}
               >
-                {item.name}
-              </a>
-            ))}
+                TLL OmniAI
+              </span>
+            </a>
+
+            {/* Desktop Menu */}
+            <div className="hidden md:flex items-center gap-6">
+              {menuItems.map((item) => (
+                <a
+                  key={item.name}
+                  href={item.href}
+                  className={`${
+                    isLight
+                      ? 'text-slate-700 hover:text-slate-900'
+                      : 'text-white/85 hover:text-white'
+                  } transition-colors text-sm font-medium`}
+                >
+                  {item.name}
+                </a>
+              ))}
+            </div>
           </div>
 
           {/* CTA Buttons + Theme Toggle */}
@@ -43,24 +73,48 @@ const Navbar = ({ theme = 'dark', onToggleTheme }) => {
               <button
                 type="button"
                 onClick={onToggleTheme}
-                className="inline-flex items-center justify-center w-9 h-9 rounded-full bg-white/5 hover:bg-white/10 text-white/80 hover:text-white border border-white/10 transition-colors"
+                className={`inline-flex items-center justify-center w-9 h-9 rounded-full border transition-colors ${
+                  isLight
+                    ? 'bg-white text-slate-900 border-slate-200 hover:bg-slate-100'
+                    : 'bg-white/5 text-white/80 border-white/10 hover:bg-white/10 hover:text-white'
+                }`}
                 aria-label={theme === 'dark' ? 'Chuyển sang chế độ sáng' : 'Chuyển sang chế độ tối'}
               >
                 {theme === 'dark' ? <FaSun className="w-4 h-4" /> : <FaMoon className="w-4 h-4" />}
               </button>
             )}
-            <a
-              href="#login"
-              className="px-5 py-1.5 rounded-full bg-white/10 ring-1 ring-white/15 text-white/85 hover:text-white backdrop-blur-sm transition-colors text-sm font-medium"
+            <div
+              className={`flex items-center rounded-full overflow-hidden text-xs border ${
+                isLight ? 'bg-slate-100 border-slate-300' : 'bg-white/5 border-white/10'
+              }`}
             >
-              Đăng nhập
-            </a>
-            <a
-              href="#signup"
-              className="px-6 py-2 rounded-full bg-gradient-to-r from-[#1ee0e0] to-[#2df5b3] text-[#0a1128] font-semibold text-sm hover:opacity-90 transition-all shadow-md"
-            >
-              Đăng ký
-            </a>
+              <button
+                type="button"
+                onClick={() => onChangeLanguage && onChangeLanguage('vi')}
+                className={`px-3 py-1.5 font-medium transition-colors ${
+                  language === 'vi'
+                    ? 'bg-white text-slate-900'
+                    : isLight
+                    ? 'text-slate-600 hover:text-slate-900'
+                    : 'text-white/80 hover:text-white'
+                }`}
+              >
+                VI
+              </button>
+              <button
+                type="button"
+                onClick={() => onChangeLanguage && onChangeLanguage('en')}
+                className={`px-3 py-1.5 font-medium transition-colors border-l ${
+                  language === 'en'
+                    ? 'bg-white text-slate-900 border-transparent'
+                    : isLight
+                    ? 'text-slate-600 hover:text-slate-900 border-slate-300'
+                    : 'text-white/80 hover:text-white border-white/10'
+                }`}
+              >
+                EN
+              </button>
+            </div>
           </div>
 
           {/* Mobile Menu Button */}
@@ -92,19 +146,39 @@ const Navbar = ({ theme = 'dark', onToggleTheme }) => {
                 </a>
               ))}
               <div className="flex items-center justify-between pt-4 border-t border-white/10">
-                <div className="flex flex-col gap-2">
-                  <a
-                    href="#login"
-                    className="text-white/80 hover:text-white transition-colors text-sm font-medium"
+                <div className="flex items-center gap-2">
+                  <div
+                    className={`flex items-center rounded-full overflow-hidden text-xs border ${
+                      isLight ? 'bg-slate-100 border-slate-300' : 'bg-white/5 border-white/10'
+                    }`}
                   >
-                    Đăng nhập
-                  </a>
-                  <a
-                    href="#signup"
-                    className="px-6 py-2 rounded-full bg-[#1ee0e0] text-[#0a1128] font-bold text-sm hover:bg-[#1ee0e0]/90 transition-all text-center"
-                  >
-                    Đăng ký
-                  </a>
+                    <button
+                      type="button"
+                      onClick={() => onChangeLanguage && onChangeLanguage('vi')}
+                      className={`px-3 py-1.5 font-medium transition-colors ${
+                        language === 'vi'
+                          ? 'bg-white text-slate-900'
+                          : isLight
+                          ? 'text-slate-600 hover:text-slate-900'
+                          : 'text-white/80 hover:text-white'
+                      }`}
+                    >
+                      VI
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => onChangeLanguage && onChangeLanguage('en')}
+                      className={`px-3 py-1.5 font-medium transition-colors border-l ${
+                        language === 'en'
+                          ? 'bg-white text-slate-900 border-transparent'
+                          : isLight
+                          ? 'text-slate-600 hover:text-slate-900 border-slate-300'
+                          : 'text-white/80 hover:text-white border-white/10'
+                      }`}
+                    >
+                      EN
+                    </button>
+                  </div>
                 </div>
                 {onToggleTheme && (
                   <button

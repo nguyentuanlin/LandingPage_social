@@ -129,7 +129,8 @@ const FloatingIcons = ({ theme = 'dark' }) => {
   )
 }
 
-const Solutions = ({ theme = 'dark' }) => {
+const Solutions = ({ theme = 'dark', language = 'vi' }) => {
+  const isEn = language === 'en'
   const sections = useMemo(() => ([
     { 
       id: 'intro', 
@@ -223,6 +224,192 @@ const Solutions = ({ theme = 'dark' }) => {
   // Các tham số và công thức chi tiết CSI được giữ trong nội bộ sản phẩm,
   // landing page chỉ hiển thị khái niệm trực quan (slider + gauge + KPI).
 
+  const intelligenceItems = isEn
+    ? [
+        {
+          title: 'RAG with enterprise knowledge',
+          badge: 'No hallucination',
+          desc: 'Connects directly to your internal documents, policies and procedures so answers stay on‑brand and grounded.',
+        },
+        {
+          title: 'Speech‑to‑Text for Telegram voice',
+          badge: 'Understand customers in real time',
+          desc: 'Automatically converts voice messages to text, saving the full history for AI to analyse and summarise.',
+        },
+        {
+          title: 'Conversation analysis & summarisation',
+          badge: 'Instant insight',
+          desc: 'Condenses hundreds of messages into a few lines, highlighting buying intent, complaints and next actions for agents.',
+        },
+      ]
+    : [
+        {
+          title: 'RAG theo tri thức doanh nghiệp',
+          badge: 'AI không bịa',
+          desc: 'Kết nối trực tiếp với kho tài liệu nội bộ, chính sách và quy trình để trả lời chuẩn giọng thương hiệu.',
+        },
+        {
+          title: 'Speech‑to‑Text cho voice Telegram',
+          badge: 'Hiểu khách hàng theo thời gian thực',
+          desc: 'Tự động chuyển voice thành văn bản, lưu toàn bộ vào lịch sử hội thoại để AI phân tích & tóm tắt.',
+        },
+        {
+          title: 'Phân tích & tóm tắt hội thoại',
+          badge: 'Insight tức thì',
+          desc: 'Rút gọn hàng trăm tin nhắn thành vài dòng, highlight ý định mua hàng, khiếu nại và next‑action cho agent.',
+        },
+      ]
+
+  const omniExperienceItems = isEn
+    ? [
+        {
+          title: 'One unified inbox for every channel',
+          desc: 'Pull Facebook, Instagram, Telegram, Gmail and Outlook into a single screen so agents work faster without tab‑hopping or missing messages.',
+        },
+        {
+          title: 'Never ask “Who is this?” again',
+          desc: 'The system automatically stitches together cross‑channel history so agents always see full context whenever a customer returns on any channel.',
+        },
+        {
+          title: 'Consistent and measurable experiences',
+          desc: 'Standardise reply playbooks across channels while tracking SLA, CSI and response time to optimise each channel and campaign.',
+        },
+      ]
+    : [
+        {
+          title: 'Một hộp thư hợp nhất cho mọi kênh',
+          desc: 'Gom Facebook, Instagram, Telegram, Gmail, Outlook vào một màn hình – agent xử lý nhanh hơn, không còn cảnh nhảy tab và bỏ sót tin.',
+        },
+        {
+          title: 'Không bao giờ hỏi lại “Anh/chị là ai ạ?”',
+          desc: 'Hệ thống tự ghép lịch sử hội thoại đa kênh, agent luôn thấy trọn bối cảnh mỗi khi khách quay lại ở bất kỳ kênh nào.',
+        },
+        {
+          title: 'Trải nghiệm nhất quán & đo lường được',
+          desc: 'Chuẩn hoá kịch bản trả lời trên tất cả kênh, đồng thời theo dõi SLA, CSI và tốc độ phản hồi để tối ưu từng kênh và chiến dịch.',
+        },
+      ]
+
+  const centralManagementItems = isEn
+    ? [
+        {
+          title: '360° customer profiles',
+          desc: 'Conversation history, social profiles, email, notes and cross‑platform metadata merged into a single timeline.',
+        },
+        {
+          title: 'Smart labels & segmentation',
+          desc: 'Tag messages on the fly to filter quickly, build reports and trigger automation scenarios.',
+        },
+        {
+          title: 'Channel & agent dashboards',
+          desc: 'See performance per channel and per agent to allocate resources and reward fairly.',
+        },
+      ]
+    : [
+        {
+          title: 'Hồ sơ khách hàng 360°',
+          desc: 'Nhật ký hội thoại, social profile, email, ghi chú và metadata đa nền tảng được gom vào một timeline duy nhất.',
+        },
+        {
+          title: 'Nhãn & phân loại thông minh',
+          desc: 'Gắn nhãn trực tiếp trên từng tin nhắn để lọc nhanh, tạo báo cáo và kích hoạt kịch bản tự động hoá.',
+        },
+        {
+          title: 'Dashboard theo kênh & agent',
+          desc: 'Nhìn rõ hiệu suất từng kênh và từng nhân viên để phân bổ nguồn lực, thưởng – phạt minh bạch.',
+        },
+      ]
+
+  const toolsCards = isEn
+    ? [
+        {
+          id: 'tools-email',
+          icon: FiFileText,
+          title: 'Email & Gmail/Outlook',
+          desc: 'Syncs email from Gmail, shows them as cards inside the chat window, and surfaces the real unread count from Outlook.',
+          color: 'cyan',
+        },
+        {
+          id: 'tools-voice',
+          icon: FiBox,
+          title: 'Voice & Speech‑to‑Text',
+          desc: 'Receives Telegram voice messages, converts them to text with OpenAI Whisper and stores full metadata.',
+          color: 'purple',
+        },
+        {
+          id: 'tools-labels',
+          icon: FiPackage,
+          title: 'Label & categorisation management',
+          desc: 'Dedicated Labels management screen; add or remove tags on each message to organise conversations and drive automation.',
+          color: 'emerald',
+        },
+        {
+          id: 'tools-templates',
+          icon: FiPercent,
+          title: 'Email templates & reply scripts',
+          desc: 'Email Template system with preview and emojis; insert quickly into email forms and conversation threads.',
+          color: 'pink',
+        },
+        {
+          id: 'tools-config',
+          icon: FiTruck,
+          title: 'Social networks configuration',
+          desc: 'Central configuration for Facebook, Instagram, Telegram, Gmail and Outlook with JSONB metadata and a modern management screen.',
+          color: 'indigo',
+        },
+        {
+          id: 'tools-dashboard',
+          icon: FiDollarSign,
+          title: 'Admin & employee dashboards',
+          desc: 'Admin and employee dashboards with stats on conversations, messages, CSI and performance by channel and agent.',
+          color: 'amber',
+        },
+      ]
+    : [
+        {
+          id: 'tools-email',
+          icon: FiFileText,
+          title: 'Email & Gmail/Outlook',
+          desc: 'Đồng bộ email từ Gmail, hiển thị dạng thẻ trong cửa sổ chat; badge số thư chưa đọc thực tế từ Outlook.',
+          color: 'cyan',
+        },
+        {
+          id: 'tools-voice',
+          icon: FiBox,
+          title: 'Voice & Speech-to-Text',
+          desc: 'Nhận voice từ Telegram, tự động chuyển sang văn bản bằng OpenAI Whisper và lưu kèm metadata.',
+          color: 'purple',
+        },
+        {
+          id: 'tools-labels',
+          icon: FiPackage,
+          title: 'Quản lý nhãn & phân loại',
+          desc: 'Trang quản lý Labels chuyên biệt, gán/bỏ nhãn ngay trên từng tin nhắn để phân loại và tự động hoá.',
+          color: 'emerald',
+        },
+        {
+          id: 'tools-templates',
+          icon: FiPercent,
+          title: 'Mẫu email & kịch bản trả lời',
+          desc: 'Hệ thống Email Template với preview, emoji icon; chèn nhanh vào form gửi mail và tự tạo message trong hội thoại.',
+          color: 'pink',
+        },
+        {
+          id: 'tools-config',
+          icon: FiTruck,
+          title: 'Cấu hình Social Networks',
+          desc: 'Cấu hình tập trung Facebook, Instagram, Telegram, Gmail, Outlook với metadata JSONB và màn hình quản lý hiện đại.',
+          color: 'indigo',
+        },
+        {
+          id: 'tools-dashboard',
+          icon: FiDollarSign,
+          title: 'Dashboard & Employee Dashboard',
+          desc: 'Dashboard admin và dashboard nhân viên với thống kê cuộc hội thoại, tin nhắn, CSI, hiệu suất theo kênh và agent.',
+          color: 'amber',
+        },
+      ]
+
   return (
     <section
       ref={containerRef}
@@ -242,10 +429,15 @@ const Solutions = ({ theme = 'dark' }) => {
           className="text-center"
         >
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            Giải pháp & <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">Tính năng</span>
+            {isEn ? 'Solutions & ' : 'Giải pháp & '}
+            <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+              {isEn ? 'Features' : 'Tính năng'}
+            </span>
           </h2>
           <p className="text-lg text-white/70 max-w-2xl mx-auto">
-            Khám phá bộ giải pháp toàn diện giúp doanh nghiệp tối ưu hóa trải nghiệm khách hàng và vận hành hiệu quả
+            {isEn
+              ? 'Explore a complete solution set that helps your business optimize customer experience and operate efficiently.'
+              : 'Khám phá bộ giải pháp toàn diện giúp doanh nghiệp tối ưu hóa trải nghiệm khách hàng và vận hành hiệu quả'}
           </p>
         </motion.div>
       </div>
@@ -357,19 +549,38 @@ const Solutions = ({ theme = 'dark' }) => {
                 <div className="solutions-section-icon p-3 rounded-xl bg-gradient-to-br from-cyan-400/20 to-blue-500/20 border border-cyan-400/30">
                   <FiMessageSquare className="w-6 h-6 text-cyan-400" />
                 </div>
-                <h3 className="text-3xl font-bold text-white">Giới thiệu</h3>
+                <h3 className="text-3xl font-bold text-white">
+                  {isEn ? 'Overview' : 'Giới thiệu'}
+                </h3>
               </div>
               <p className="text-white/80 text-lg leading-relaxed">
-                TLL Omnichannel là nền tảng <span className="text-cyan-400 font-semibold">AI CRM đa kênh</span>{' '}
-                giúp hợp nhất các kênh social & email
-                <span className="text-cyan-400 font-semibold"> (ví dụ: Facebook, Instagram, Telegram, Gmail, Outlook)</span>{' '}
-                vào một inbox duy nhất, được thiết kế riêng cho đội chăm sóc khách hàng hiện đại.
-                <span className="block mt-3">
-                  Thay vì nhân viên phải mở nhiều tab, ghi chú rời rạc và khó theo dõi lịch sử khách hàng, mọi cuộc hội thoại,
-                  hồ sơ social và các chỉ số chất lượng dịch vụ như CSI, SLA, hiệu suất agent đều được tập trung về một nơi.
-                  Từ đó AI có thể phân tích, tóm tắt bối cảnh và gợi ý phản hồi thông minh, giúp doanh nghiệp mở rộng quy mô
-                  chăm sóc khách hàng mà vẫn giữ trải nghiệm cá nhân hóa.
-                </span>
+                {isEn ? (
+                  <>
+                    TLL Omnichannel is a multi‑channel <span className="text-cyan-400 font-semibold">AI CRM platform</span>{' '}
+                    that unifies social & email channels
+                    <span className="text-cyan-400 font-semibold"> (for example: Facebook, Instagram, Telegram, Gmail, Outlook)</span>{' '}
+                    into a single inbox designed specifically for modern customer support teams.
+                    <span className="block mt-3">
+                      Instead of agents having to open many tabs, take scattered notes and struggle to follow customer history,
+                      every conversation, social profile and service‑quality metric like CSI, SLA and agent performance is
+                      centralized in one place. From there, AI can analyse, summarise context and suggest smart replies, helping
+                      businesses scale customer care while still keeping a personalised experience.
+                    </span>
+                  </>
+                ) : (
+                  <>
+                    TLL Omnichannel là nền tảng <span className="text-cyan-400 font-semibold">AI CRM đa kênh</span>{' '}
+                    giúp hợp nhất các kênh social & email
+                    <span className="text-cyan-400 font-semibold"> (ví dụ: Facebook, Instagram, Telegram, Gmail, Outlook)</span>{' '}
+                    vào một inbox duy nhất, được thiết kế riêng cho đội chăm sóc khách hàng hiện đại.
+                    <span className="block mt-3">
+                      Thay vì nhân viên phải mở nhiều tab, ghi chú rời rạc và khó theo dõi lịch sử khách hàng, mọi cuộc hội thoại,
+                      hồ sơ social và các chỉ số chất lượng dịch vụ như CSI, SLA, hiệu suất agent đều được tập trung về một nơi.
+                      Từ đó AI có thể phân tích, tóm tắt bối cảnh và gợi ý phản hồi thông minh, giúp doanh nghiệp mở rộng quy mô
+                      chăm sóc khách hàng mà vẫn giữ trải nghiệm cá nhân hóa.
+                    </span>
+                  </>
+                )}
               </p>
             </div>
           </motion.div>
@@ -390,30 +601,18 @@ const Solutions = ({ theme = 'dark' }) => {
                   <FiCpu className="w-6 h-6 text-purple-400" />
                 </div>
                 <div>
-                  <h3 className="text-3xl font-bold text-white">TLL Intelligence</h3>
+                  <h3 className="text-3xl font-bold text-white">
+                    {isEn ? 'TLL Intelligence' : 'TLL Intelligence'}
+                  </h3>
                   <p className="text-white/70 text-sm mt-1 max-w-2xl">
-                    “Bộ não AI” của hệ thống, hiểu ngữ cảnh và tri thức riêng của doanh nghiệp thay vì trả lời chung chung như chatbot phổ thông.
+                    {isEn
+                      ? 'The “AI brain” of the system – it understands context and your own enterprise knowledge instead of giving generic chatbot answers.'
+                      : '“Bộ não AI” của hệ thống, hiểu ngữ cảnh và tri thức riêng của doanh nghiệp thay vì trả lời chung chung như chatbot phổ thông'}
                   </p>
                 </div>
               </div>
               <div className="space-y-5">
-                {[
-                  { 
-                    title: 'RAG theo tri thức doanh nghiệp', 
-                    badge: 'AI không bịa',
-                    desc: 'Kết nối trực tiếp với kho tài liệu nội bộ, chính sách và quy trình để trả lời chuẩn giọng thương hiệu.' 
-                  },
-                  { 
-                    title: 'Speech‑to‑Text cho voice Telegram', 
-                    badge: 'Hiểu khách hàng theo thời gian thực',
-                    desc: 'Tự động chuyển voice thành văn bản, lưu toàn bộ vào lịch sử hội thoại để AI phân tích & tóm tắt.' 
-                  },
-                  { 
-                    title: 'Phân tích & tóm tắt hội thoại', 
-                    badge: 'Insight tức thì',
-                    desc: 'Rút gọn hàng trăm tin nhắn thành vài dòng, highlight ý định mua hàng, khiếu nại và next‑action cho agent.' 
-                  }
-                ].map((item, i) => (
+                {intelligenceItems.map((item, i) => (
                   <div
                     key={i}
                     className="flex items-start gap-4 p-5 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-purple-400/40 transition-all"
@@ -454,27 +653,20 @@ const Solutions = ({ theme = 'dark' }) => {
                   <FiShoppingCart className="w-6 h-6 text-emerald-400" />
                 </div>
                 <div>
-                  <h3 className="text-3xl font-bold text-white">Trải nghiệm khách hàng đa kênh liền mạch</h3>
+                  <h3 className="text-3xl font-bold text-white">
+                    {isEn
+                      ? 'Seamless omnichannel customer journey'
+                      : 'Trải nghiệm khách hàng đa kênh liền mạch'}
+                  </h3>
                   <p className="text-white/70 text-sm mt-1 max-w-2xl">
-                    Khách nhắn ở đâu cũng được nhận diện ngay ở đó; hành trình không bị đứt đoạn giữa Facebook, Instagram, Telegram, Gmail, Outlook.
+                    {isEn
+                      ? 'Wherever customers message you, they are recognised immediately; the journey stays continuous across Facebook, Instagram, Telegram, Gmail and Outlook.'
+                      : 'Khách nhắn ở đâu cũng được nhận diện ngay ở đó; hành trình không bị đứt đoạn giữa Facebook, Instagram, Telegram, Gmail, Outlook.'}
                   </p>
                 </div>
               </div>
               <div className="space-y-5">
-                {[
-                  {
-                    title: 'Một hộp thư hợp nhất cho mọi kênh',
-                    desc: 'Gom Facebook, Instagram, Telegram, Gmail, Outlook vào một màn hình – agent xử lý nhanh hơn, không còn cảnh nhảy tab và bỏ sót tin.' 
-                  },
-                  {
-                    title: 'Không bao giờ hỏi lại “Anh/chị là ai ạ?”',
-                    desc: 'Hệ thống tự ghép lịch sử hội thoại đa kênh, agent luôn thấy trọn bối cảnh mỗi khi khách quay lại ở bất kỳ kênh nào.' 
-                  },
-                  {
-                    title: 'Trải nghiệm nhất quán & đo lường được',
-                    desc: 'Chuẩn hoá kịch bản trả lời trên tất cả kênh, đồng thời theo dõi SLA, CSI và tốc độ phản hồi để tối ưu từng kênh và chiến dịch.' 
-                  }
-                ].map((item, i) => (
+                {omniExperienceItems.map((item, i) => (
                   <div
                     key={i}
                     className="flex items-start gap-4 p-5 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-emerald-400/40 transition-all"
@@ -508,27 +700,18 @@ const Solutions = ({ theme = 'dark' }) => {
                   <FiGrid className="w-6 h-6 text-blue-400" />
                 </div>
                 <div>
-                  <h3 className="text-3xl font-bold text-white">Quản lý đa kênh tập trung</h3>
+                  <h3 className="text-3xl font-bold text-white">
+                    {isEn ? 'Centralised omnichannel management' : 'Quản lý đa kênh tập trung'}
+                  </h3>
                   <p className="text-white/70 text-sm mt-1 max-w-2xl">
-                    Một nơi duy nhất để nắm toàn bộ khách hàng, hội thoại và hiệu suất đội ngũ – không còn dữ liệu bị chia cắt.
+                    {isEn
+                      ? 'One place to see every customer, conversation and team performance metric – no more fragmented data.'
+                      : 'Một nơi duy nhất để nắm toàn bộ khách hàng, hội thoại và hiệu suất đội ngũ – không còn dữ liệu bị chia cắt.'}
                   </p>
                 </div>
               </div>
               <div className="space-y-5">
-                {[
-                  {
-                    title: 'Hồ sơ khách hàng 360°',
-                    desc: 'Nhật ký hội thoại, social profile, email, ghi chú và metadata đa nền tảng được gom vào một timeline duy nhất.' 
-                  },
-                  {
-                    title: 'Nhãn & phân loại thông minh',
-                    desc: 'Gắn nhãn trực tiếp trên từng tin nhắn để lọc nhanh, tạo báo cáo và kích hoạt kịch bản tự động hoá.' 
-                  },
-                  {
-                    title: 'Dashboard theo kênh & agent',
-                    desc: 'Nhìn rõ hiệu suất từng kênh và từng nhân viên để phân bổ nguồn lực, thưởng – phạt minh bạch.' 
-                  }
-                ].map((item, i) => (
+                {centralManagementItems.map((item, i) => (
                   <div
                     key={i}
                     className="flex items-start gap-4 p-5 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-blue-400/40 transition-all"
@@ -561,17 +744,12 @@ const Solutions = ({ theme = 'dark' }) => {
                 <div className="solutions-section-icon p-3 rounded-xl bg-gradient-to-br from-cyan-400/20 to-blue-500/20 border border-cyan-400/30">
                   <FiZap className="w-6 h-6 text-cyan-400" />
                 </div>
-                <h3 className="text-3xl font-bold text-white">Công cụ & Tự động hoá</h3>
+                <h3 className="text-3xl font-bold text-white">
+                  {isEn ? 'Tools & Automation' : 'Công cụ & Tự động hoá'}
+                </h3>
               </div>
               <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
-                {[
-                  { id: 'tools-email', icon: FiFileText, title: 'Email & Gmail/Outlook', desc: 'Đồng bộ email từ Gmail, hiển thị dạng thẻ trong cửa sổ chat; badge số thư chưa đọc thực tế từ Outlook.', color: 'cyan' },
-                  { id: 'tools-voice', icon: FiBox, title: 'Voice & Speech-to-Text', desc: 'Nhận voice từ Telegram, tự động chuyển sang văn bản bằng OpenAI Whisper và lưu kèm metadata.', color: 'purple' },
-                  { id: 'tools-labels', icon: FiPackage, title: 'Quản lý nhãn & phân loại', desc: 'Trang quản lý Labels chuyên biệt, gán/bỏ nhãn ngay trên từng tin nhắn để phân loại và tự động hoá.', color: 'emerald' },
-                  { id: 'tools-templates', icon: FiPercent, title: 'Mẫu email & kịch bản trả lời', desc: 'Hệ thống Email Template với preview, emoji icon; chèn nhanh vào form gửi mail và tự tạo message trong hội thoại.', color: 'pink' },
-                  { id: 'tools-config', icon: FiTruck, title: 'Cấu hình Social Networks', desc: 'Cấu hình tập trung Facebook, Instagram, Telegram, Gmail, Outlook với metadata JSONB và màn hình quản lý hiện đại.', color: 'indigo' },
-                  { id: 'tools-dashboard', icon: FiDollarSign, title: 'Dashboard & Employee Dashboard', desc: 'Dashboard admin và dashboard nhân viên với thống kê cuộc hội thoại, tin nhắn, CSI, hiệu suất theo kênh và agent.', color: 'amber' }
-                ].map((card, idx) => {
+                {toolsCards.map((card, idx) => {
                   const Icon = card.icon
                   return (
                     <motion.div
@@ -618,7 +796,11 @@ const Solutions = ({ theme = 'dark' }) => {
                 </div>
                 <div>
                   <h3 className="text-3xl font-bold text-white">CSI – Customer Satisfaction Index</h3>
-                  <p className="text-white/60 text-sm">Điểm tổng hợp từ 3 yếu tố: CSAT, Tỷ lệ giải quyết, Tốc độ phản hồi</p>
+                  <p className="text-white/60 text-sm">
+                    {isEn
+                      ? 'Combined score from three factors: CSAT, Resolution Rate, and Response Speed.'
+                      : 'Điểm tổng hợp từ 3 yếu tố: CSAT, Tỷ lệ giải quyết, Tốc độ phản hồi'}
+                  </p>
                 </div>
               </div>
 
@@ -628,7 +810,9 @@ const Solutions = ({ theme = 'dark' }) => {
                   {/* CSAT Slider */}
                   <div className="p-6 rounded-2xl bg-gradient-to-br from-cyan-500/10 to-cyan-600/5 border border-cyan-400/20">
                     <div className="flex justify-between items-center mb-3">
-                      <span className="text-white font-semibold">Độ hài lòng khách hàng</span>
+                      <span className="text-white font-semibold">
+                        {isEn ? 'Customer satisfaction' : 'Độ hài lòng khách hàng'}
+                      </span>
                       <span className="text-2xl font-bold text-cyan-400">{csat}</span>
                     </div>
                     <input 
@@ -647,7 +831,9 @@ const Solutions = ({ theme = 'dark' }) => {
                   {/* Resolution Rate Slider */}
                   <div className="p-6 rounded-2xl bg-gradient-to-br from-emerald-500/10 to-emerald-600/5 border border-emerald-400/20">
                     <div className="flex justify-between items-center mb-3">
-                      <span className="text-white font-semibold">Tỷ lệ giải quyết</span>
+                      <span className="text-white font-semibold">
+                        {isEn ? 'Resolution rate' : 'Tỷ lệ giải quyết'}
+                      </span>
                       <span className="text-2xl font-bold text-emerald-400">{resolution}%</span>
                     </div>
                     <input 
@@ -666,7 +852,9 @@ const Solutions = ({ theme = 'dark' }) => {
                   {/* Response Speed Slider */}
                   <div className="p-6 rounded-2xl bg-gradient-to-br from-violet-500/10 to-violet-600/5 border border-violet-400/20">
                     <div className="flex justify-between items-center mb-3">
-                      <span className="text-white font-semibold">Tốc độ phản hồi</span>
+                      <span className="text-white font-semibold">
+                        {isEn ? 'Response speed' : 'Tốc độ phản hồi'}
+                      </span>
                       <span className="text-2xl font-bold text-violet-400">{speed}</span>
                     </div>
                     <input 
@@ -684,10 +872,13 @@ const Solutions = ({ theme = 'dark' }) => {
 
                   {/* Chỉ hiển thị tổng điểm CSI, không lộ công thức chi tiết */}
                   <div className="p-6 rounded-2xl bg-gradient-to-br from-white/10 to-white/5 border border-white/20">
-                    <div className="text-white/80 mb-2 font-semibold">Điểm CSI tổng hợp</div>
+                    <div className="text-white/80 mb-2 font-semibold">
+                      {isEn ? 'Overall CSI score' : 'Điểm CSI tổng hợp'}
+                    </div>
                     <div className="text-white/60 text-sm">
-                      Dựa trên độ hài lòng, tỷ lệ giải quyết và tốc độ phản hồi. Ví dụ này cho thấy khi bạn kéo các thanh bên trên,
-                      hệ thống sẽ tính ra một điểm CSI duy nhất để theo dõi trải nghiệm khách hàng.
+                      {isEn
+                        ? 'Based on satisfaction, resolution rate and response speed. This demo shows that when you adjust the sliders above, the system calculates a single CSI score to track customer experience.'
+                        : 'Dựa trên độ hài lòng, tỷ lệ giải quyết và tốc độ phản hồi. Ví dụ này cho thấy khi bạn kéo các thanh bên trên, hệ thống sẽ tính ra một điểm CSI duy nhất để theo dõi trải nghiệm khách hàng.'}
                     </div>
                   </div>
                 </div>
@@ -713,7 +904,9 @@ const Solutions = ({ theme = 'dark' }) => {
                           <div className="text-6xl font-black bg-gradient-to-br from-yellow-400 to-orange-500 bg-clip-text text-transparent mb-1">
                             {csi}
                           </div>
-                          <div className="text-xs uppercase tracking-widest text-white/60 font-semibold">Điểm CSI</div>
+                          <div className="text-xs uppercase tracking-widest text-white/60 font-semibold">
+                            {isEn ? 'CSI SCORE' : 'Điểm CSI'}
+                          </div>
                         </div>
                       </div>
                     </div>

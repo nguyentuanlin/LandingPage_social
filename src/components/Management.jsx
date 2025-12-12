@@ -2,9 +2,11 @@ import React, { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { FaUsers, FaChartLine, FaDatabase, FaShieldAlt } from 'react-icons/fa'
 
-const Management = () => {
+const Management = ({ language = 'vi' }) => {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, amount: 0.2 })
+
+  const isEn = language === 'en'
 
   const features = [
     {
@@ -48,14 +50,15 @@ const Management = () => {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            Quản lý{' '}
+            {isEn ? 'Centralized ' : 'Quản lý '}
             <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
-              tập trung
+              {isEn ? 'management' : 'tập trung'}
             </span>
           </h2>
           <p className="text-lg md:text-xl text-white/70 max-w-3xl mx-auto">
-            Công cụ mạnh mẽ để quản lý hoạt động đa kênh, cộng tác nhóm, 
-            và thông tin khách hàng từ một bảng điều khiển thông minh.
+            {isEn
+              ? 'Powerful tools to manage multi‑channel operations, team collaboration, and customer information from a single smart dashboard.'
+              : 'Công cụ mạnh mẽ để quản lý hoạt động đa kênh, cộng tác nhóm, và thông tin khách hàng từ một bảng điều khiển thông minh.'}
           </p>
         </motion.div>
 
