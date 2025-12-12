@@ -21,12 +21,19 @@ const ConsultationWidget = ({ theme = 'dark' }) => {
   const [savingProfile, setSavingProfile] = useState(false)
   const [profileSaved, setProfileSaved] = useState(false)
   const [showProfileForm, setShowProfileForm] = useState(true)
+  const [unreadCount, setUnreadCount] = useState(0)
   const socketRef = useRef(null)
   const messagesEndRef = useRef(null)
+  const isOpenRef = useRef(isOpen)
 
   const toggleOpen = () => {
     setIsOpen((prev) => !prev)
   }
+
+  // Đồng bộ ref với trạng thái isOpen thực tế để dùng trong callback WebSocket
+  useEffect(() => {
+    isOpenRef.current = isOpen
+  }, [isOpen])
 
   const normalizeMessage = (m) => {
     if (!m) return null
@@ -180,6 +187,12 @@ const ConsultationWidget = ({ theme = 'dark' }) => {
       if (!normalized) return
       setMessages((prev) => {
         if (prev.some((m) => m.id === normalized.id)) return prev
+
+        // Nếu popup đang đóng và đây là tin nhắn không phải của khách, tăng đếm chưa đọc
+        if (!isOpenRef.current && normalized.senderType !== 'customer') {
+          setUnreadCount((count) => count + 1)
+        }
+
         return [...prev, normalized]
       })
     })
@@ -195,6 +208,13 @@ const ConsultationWidget = ({ theme = 'dark' }) => {
       socketRef.current = null
     }
   }, [visitorId, conversationId])
+
+  // Khi mở popup, reset số tin nhắn chưa đọc
+  useEffect(() => {
+    if (isOpen) {
+      setUnreadCount(0)
+    }
+  }, [isOpen])
 
   // Khi mở popup hoặc khi có thêm tin nhắn mới, luôn cuộn xuống tin nhắn cuối cùng
   useEffect(() => {
@@ -572,6 +592,12 @@ const ConsultationWidget = ({ theme = 'dark' }) => {
               className="w-full h-full object-cover"
             />
           </button>
+
+          {unreadCount > 0 && (
+            <div className="absolute -top-1 -right-1 min-w-[20px] h-5 rounded-full bg-red-500 text-white text-[10px] font-semibold flex items-center justify-center px-1.5 shadow-md shadow-red-500/60">
+              {unreadCount > 9 ? '9+' : unreadCount}
+            </div>
+          )}
         </div>
       )}
     </div>
