@@ -8,6 +8,7 @@ import OmniChannel from './components/OmniChannel'
 import Management from './components/Management'
 import Pricing from './components/Pricing'
 import Footer from './components/Footer'
+import ConsultationWidget from './components/ConsultationWidget'
 
 function App() {
   const [showScrollTop, setShowScrollTop] = useState(false)
@@ -99,6 +100,9 @@ function App() {
         <Footer theme={theme} />
       </div>
 
+      {/* Consultation Popup Widget */}
+      <ConsultationWidget theme={theme} />
+
       {/* Scroll to Top Button */}
       <AnimatePresence>
         {showScrollTop && (
@@ -107,7 +111,7 @@ function App() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 20 }}
             onClick={scrollToTop}
-            className="fixed bottom-8 right-8 z-50 p-4 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg hover:shadow-xl transition-all hover:-translate-y-1"
+            className="fixed bottom-8 right-24 z-40 p-4 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg hover:shadow-xl transition-all hover:-translate-y-1"
           >
             <FaArrowUp className="w-5 h-5" />
           </motion.button>

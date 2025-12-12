@@ -65,8 +65,11 @@ const OmniChannel = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-black mb-4 text-gradient">
-            Tích hợp đa kênh
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+            Tích hợp{' '}
+            <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+              đa kênh
+            </span>
           </h2>
           <p className="text-lg md:text-xl text-white/70 max-w-3xl mx-auto">
             Kết nối Facebook, Telegram, Gmail, Zalo, Instagram và WhatsApp vào một hộp thư thống nhất. 

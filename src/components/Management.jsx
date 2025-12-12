@@ -47,8 +47,11 @@ const Management = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-black mb-4 text-gradient">
-            Quản lý tập trung
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+            Quản lý{' '}
+            <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+              tập trung
+            </span>
           </h2>
           <p className="text-lg md:text-xl text-white/70 max-w-3xl mx-auto">
             Công cụ mạnh mẽ để quản lý hoạt động đa kênh, cộng tác nhóm, 

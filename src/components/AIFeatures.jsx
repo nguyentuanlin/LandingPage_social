@@ -47,8 +47,11 @@ const AIFeatures = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-black mb-4 text-gradient">
-            Hội thoại thông minh với AI
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+            Hội thoại thông minh với{' '}
+            <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+              AI
+            </span>
           </h2>
           <p className="text-lg md:text-xl text-white/70 max-w-3xl mx-auto">
             Tận dụng công nghệ AI để tự động hóa quy trình, tối ưu trải nghiệm khách hàng, 
