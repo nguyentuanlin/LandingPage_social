@@ -15,22 +15,25 @@ function App() {
   const [theme, setTheme] = useState('dark')
   const [language, setLanguage] = useState('vi')
 
+  // Set theme ngay lập tức khi mount để tránh flash
   useEffect(() => {
-    // Khởi tạo theme từ localStorage hoặc system preference
+    const root = document.documentElement
+    // Mặc định là dark ngay từ đầu
+    root.dataset.theme = 'dark'
+  }, [])
+
+  useEffect(() => {
+    // Khởi tạo theme từ localStorage, mặc định luôn là dark
     try {
       const saved = window.localStorage.getItem('theme')
       if (saved === 'light' || saved === 'dark') {
         setTheme(saved)
-        return
+      } else {
+        // Nếu không có trong localStorage, mặc định là dark
+        setTheme('dark')
       }
     } catch (e) {
-      // ignore
-    }
-
-    if (window.matchMedia) {
-      const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches
-      setTheme(prefersLight ? 'light' : 'dark')
-    } else {
+      // ignore, giữ mặc định dark
       setTheme('dark')
     }
   }, [])

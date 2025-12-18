@@ -1,6 +1,6 @@
 import React, { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
-import { FaRobot, FaComments, FaMicrophone, FaClock } from 'react-icons/fa'
+import { FaRobot, FaComments, FaClock } from 'react-icons/fa'
 
 const AIFeatures = ({ language = 'vi' }) => {
   const ref = useRef(null)
@@ -28,15 +28,6 @@ const AIFeatures = ({ language = 'vi' }) => {
       titleEn: 'AI auto‑reply',
       descEn:
         'Intelligent replies powered by RAG. Answers understand context from your own knowledge base.',
-    },
-    {
-      key: 'stt',
-      icon: <FaMicrophone className="w-8 h-8" />,
-      color: '#10b981',
-      titleVi: 'Chuyển giọng nói thành văn bản',
-      descVi: 'Tự động chuyển đổi tin nhắn thoại bằng Google Cloud Speech‑to‑Text API.',
-      titleEn: 'Voice‑to‑text',
-      descEn: 'Automatically convert voice messages to text using speech‑to‑text technology.',
     },
     {
       key: 'scheduled',
@@ -84,7 +75,7 @@ const AIFeatures = ({ language = 'vi' }) => {
         </motion.div>
 
         {/* Features Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {features.map((feature, idx) => (
             <motion.div
               key={feature.title}

@@ -142,7 +142,7 @@ const Solutions = ({ theme = 'dark', language = 'vi' }) => {
       id: 'intelligence', 
       label: 'TLL Intelligence', 
       icon: FiCpu,
-      highlights: ['RAG theo tri thức doanh nghiệp', 'Speech-to-Text cho voice Telegram', 'Phân tích, tóm tắt hội thoại']
+      highlights: ['RAG theo tri thức doanh nghiệp', 'Phân loại câu hỏi & tối ưu truy vấn', 'Phân tích, tóm tắt hội thoại']
     },
     { 
       id: 'omni-experience', 
@@ -228,35 +228,35 @@ const Solutions = ({ theme = 'dark', language = 'vi' }) => {
     ? [
         {
           title: 'RAG with enterprise knowledge',
-          badge: 'No hallucination',
-          desc: 'Connects directly to your internal documents, policies and procedures so answers stay on‑brand and grounded.',
+          badge: 'Grounded answers',
+          desc: 'Connects directly to your internal documents, policies and QA items stored in the AI backend so answers stay consistent, auditable and on‑brand.',
         },
         {
-          title: 'Speech‑to‑Text for Telegram voice',
-          badge: 'Understand customers in real time',
-          desc: 'Automatically converts voice messages to text, saving the full history for AI to analyse and summarise.',
+          title: 'Smart query routing & optimisation',
+          badge: 'Use AI only where needed',
+          desc: 'Classifies each question into small talk or knowledge query, enriches it with conversation memory and only triggers RAG when it really needs to search your knowledge base.',
         },
         {
           title: 'Conversation analysis & summarisation',
           badge: 'Instant insight',
-          desc: 'Condenses hundreds of messages into a few lines, highlighting buying intent, complaints and next actions for agents.',
+          desc: 'Summarises long threads, tracks topics and key points in memory and helps agents see buying intent, complaints and follow‑up actions at a glance.',
         },
       ]
     : [
         {
           title: 'RAG theo tri thức doanh nghiệp',
-          badge: 'AI không bịa',
-          desc: 'Kết nối trực tiếp với kho tài liệu nội bộ, chính sách và quy trình để trả lời chuẩn giọng thương hiệu.',
+          badge: 'Trả lời có căn cứ',
+          desc: 'Kết nối trực tiếp với kho tài liệu nội bộ, QA Items và chính sách trong backend AI để câu trả lời nhất quán, tra cứu lại được và đúng giọng thương hiệu.',
         },
         {
-          title: 'Speech‑to‑Text cho voice Telegram',
-          badge: 'Hiểu khách hàng theo thời gian thực',
-          desc: 'Tự động chuyển voice thành văn bản, lưu toàn bộ vào lịch sử hội thoại để AI phân tích & tóm tắt.',
+          title: 'Phân loại câu hỏi & tối ưu truy vấn',
+          badge: 'Chỉ dùng RAG khi cần',
+          desc: 'Tự động phân loại câu hỏi xã giao hay câu hỏi kiến thức, làm rõ truy vấn dựa trên history rồi mới kích hoạt RAG tìm kiếm trong knowledge base khi thực sự cần.',
         },
         {
           title: 'Phân tích & tóm tắt hội thoại',
           badge: 'Insight tức thì',
-          desc: 'Rút gọn hàng trăm tin nhắn thành vài dòng, highlight ý định mua hàng, khiếu nại và next‑action cho agent.',
+          desc: 'Rút gọn hàng trăm tin nhắn thành vài dòng, lưu memory về chủ đề và key points để agent nắm nhanh ý định mua hàng, khiếu nại và bước xử lý tiếp theo.',
         },
       ]
 
@@ -330,13 +330,6 @@ const Solutions = ({ theme = 'dark', language = 'vi' }) => {
           color: 'cyan',
         },
         {
-          id: 'tools-voice',
-          icon: FiBox,
-          title: 'Voice & Speech‑to‑Text',
-          desc: 'Receives Telegram voice messages, converts them to text with OpenAI Whisper and stores full metadata.',
-          color: 'purple',
-        },
-        {
           id: 'tools-labels',
           icon: FiPackage,
           title: 'Label & categorisation management',
@@ -372,13 +365,6 @@ const Solutions = ({ theme = 'dark', language = 'vi' }) => {
           title: 'Email & Gmail/Outlook',
           desc: 'Đồng bộ email từ Gmail, hiển thị dạng thẻ trong cửa sổ chat; badge số thư chưa đọc thực tế từ Outlook.',
           color: 'cyan',
-        },
-        {
-          id: 'tools-voice',
-          icon: FiBox,
-          title: 'Voice & Speech-to-Text',
-          desc: 'Nhận voice từ Telegram, tự động chuyển sang văn bản bằng OpenAI Whisper và lưu kèm metadata.',
-          color: 'purple',
         },
         {
           id: 'tools-labels',
@@ -592,44 +578,48 @@ const Solutions = ({ theme = 'dark', language = 'vi' }) => {
             whileInView={{ opacity: 1, y: 0 }} 
             viewport={{ once: true }} 
             transition={{ duration: 0.5 }}
-            className="group relative rounded-3xl bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl border border-white/20 p-8 lg:p-10 hover:border-purple-400/50 transition-all duration-300 overflow-hidden scroll-mt-28 lg:scroll-mt-36"
+            className="group relative rounded-3xl bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl border border-white/20 p-5 sm:p-6 lg:p-10 hover:border-purple-400/50 transition-all duration-300 overflow-hidden scroll-mt-28 lg:scroll-mt-36"
           >
             <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-purple-500/10 to-pink-500/10 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             <div className="relative">
-              <div className="flex items-center gap-4 mb-4">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4 mb-4 sm:mb-6">
                 <div className="solutions-section-icon p-3 rounded-xl bg-gradient-to-br from-purple-400/20 to-pink-500/20 border border-purple-400/30">
                   <FiCpu className="w-6 h-6 text-purple-400" />
                 </div>
                 <div>
-                  <h3 className="text-3xl font-bold text-white">
+                  <h3 className="text-2xl sm:text-3xl font-bold text-white">
                     {isEn ? 'TLL Intelligence' : 'TLL Intelligence'}
                   </h3>
-                  <p className="text-white/70 text-sm mt-1 max-w-2xl">
+                  <p className="text-white/70 text-xs sm:text-sm mt-1 max-w-2xl">
                     {isEn
                       ? 'The “AI brain” of the system – it understands context and your own enterprise knowledge instead of giving generic chatbot answers.'
                       : '“Bộ não AI” của hệ thống, hiểu ngữ cảnh và tri thức riêng của doanh nghiệp thay vì trả lời chung chung như chatbot phổ thông'}
                   </p>
                 </div>
               </div>
-              <div className="space-y-5">
+              <div className="space-y-4 sm:space-y-5">
                 {intelligenceItems.map((item, i) => (
                   <div
                     key={i}
-                    className="flex items-start gap-4 p-5 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-purple-400/40 transition-all"
+                    className="flex flex-col sm:flex-row items-start gap-3 sm:gap-4 p-4 sm:p-5 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-purple-400/40 transition-all"
                   >
                     <div className="solutions-sub-icon mt-1 p-2 rounded-lg bg-gradient-to-br from-purple-500/20 to-pink-500/20 border border-purple-400/40">
                       <FiCheckCircle className="w-4 h-4 text-purple-200" />
                     </div>
                     <div className="flex-1">
-                      <div className="flex items-center justify-between gap-3">
-                        <div className="text-white font-semibold">{item.title}</div>
+                      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-3">
+                        <div className="text-white font-semibold text-base sm:text-lg">
+                          {item.title}
+                        </div>
                         {item.badge && (
-                          <span className="solutions-badge px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-purple-500/20 text-purple-200 border border-purple-300/30 whitespace-nowrap">
+                          <span className="solutions-badge px-2 py-0.5 rounded-full text-[10px] sm:text-[11px] font-medium bg-purple-500/20 text-purple-200 border border-purple-300/30 whitespace-normal sm:whitespace-nowrap max-w-[180px] text-center">
                             {item.badge}
                           </span>
                         )}
                       </div>
-                      <div className="text-white/60 text-sm mt-1">{item.desc}</div>
+                      <div className="text-white/60 text-xs sm:text-sm mt-1">
+                        {item.desc}
+                      </div>
                     </div>
                   </div>
                 ))}
